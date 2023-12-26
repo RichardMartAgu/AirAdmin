@@ -9,7 +9,7 @@ import android.view.View;
 
 import com.svalero.airadmin.R;
 
-public class IndexActivity extends AppCompatActivity {
+public class IndexView extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -23,7 +23,7 @@ public class IndexActivity extends AppCompatActivity {
     }
 
     public void goListAirports(View view){
-        Intent intent = new Intent(this, AirportListActivity.class);
+        Intent intent = new Intent(this, AirportListView.class);
         startActivity(intent);
     }
 }

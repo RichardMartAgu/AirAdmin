@@ -2,6 +2,7 @@ package com.svalero.airadmin.view;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-public class AirportRegisterActivity extends AppCompatActivity {
+public class AirportRegisterView extends AppCompatActivity {
+
 
 }
