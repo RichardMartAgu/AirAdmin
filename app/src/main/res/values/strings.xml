@@ -1,4 +1,12 @@
 <resources>
     <string name="app_name">AirAdmin</string>
     <string name="airports">aeropuertos</string>
+    <string name="inactive" >Sin actividad</string>
+    <string name="active" >Con actividad</string>
+    <string name="here" >Aquí</string>
+    <string name="registerOk" >Aeropuerto registrado correctamente</string>
+
+<!--    Errores-->
+    <string name="error_unknown">Error desconocido</string>
+    <string name="error_response">Error al procesar la respuesta de error</string>
 </resources>

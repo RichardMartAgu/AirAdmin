@@ -2,6 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
 
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.INTERNET" />
 
     <application
@@ -15,7 +17,15 @@
         android:theme="@style/Theme.AirAdmin"
         tools:targetApi="31"
         android:usesCleartextTraffic="true">
+        <activity
+            android:name=".view.AirportDetailsView"
+            android:label="Airport Details">
+        </activity>
         <activity android:name=".view.AirportListView"
+            android:exported="false">
+
+        </activity>
+        <activity android:name=".view.AirportRegisterView"
             android:exported="false">
 
         </activity>

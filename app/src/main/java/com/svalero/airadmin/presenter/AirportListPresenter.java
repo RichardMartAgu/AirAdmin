@@ -1,15 +1,12 @@
 package com.svalero.airadmin.presenter;
 
-import android.content.Context;
-import android.content.SharedPreferences;
-
 import com.svalero.airadmin.contract.AirportListContract;
 import com.svalero.airadmin.domain.Airport;
 import com.svalero.airadmin.model.AirportListModel;
 
 import java.util.List;
 
-public class AirportListPresenter implements AirportListContract.Presenter, AirportListContract.Model.OnLoadAirportListener {
+public class AirportListPresenter implements AirportListContract.Presenter, AirportListContract.Model.OnLoadAllAirportListener {
 
     private AirportListContract.View view;
     private AirportListContract.Model model;
@@ -24,12 +21,12 @@ public class AirportListPresenter implements AirportListContract.Presenter, Airp
     }
 
     @Override
-    public void onLoadAirportSuccess(List<Airport> airport) {
-        view.listAirports(airport);
+    public void onLoadAllAirportSuccess(List<Airport> airport) {
+        view.listAllAirports(airport);
     }
 
     @Override
-    public void onLoadAirportError(String message) {
+    public void onLoadAllAirportError(String message) {
         view.showMessage(message);
     }
 

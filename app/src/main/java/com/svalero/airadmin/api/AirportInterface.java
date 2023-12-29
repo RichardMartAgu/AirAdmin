@@ -12,15 +12,19 @@ import retrofit2.http.GET;
 import retrofit2.http.POST;
 import retrofit2.http.Path;
 
-public interface AirApiInterface {
+public interface AirportInterface {
 
     @GET("airports")
     Call<List<Airport>> getAirports();
+    @GET("airport/{airportId}")
+    Call<Airport> getAirportById(@Path("airportId") long airportId);
 
     @POST("airports")
     Call<Airport> addAirport(@Body Airport airport);
 
     @DELETE("airport/{airportId}")
     Call<Void> deleteAirport(@Path("airportId") long airportId);
+
+
 }
 

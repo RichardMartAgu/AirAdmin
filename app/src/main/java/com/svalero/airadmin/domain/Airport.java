@@ -10,9 +10,7 @@ import java.time.LocalDate;
 @Entity
 public class Airport {
 
-    @PrimaryKey
-    @NonNull
-    private long id;
+    private Long id;
     @NonNull
     @ColumnInfo
     private  String name;
@@ -23,13 +21,13 @@ public class Airport {
     @ColumnInfo
     private String foundationYear;
     @ColumnInfo
-    private float latitude;
+    private double latitude;
     @ColumnInfo
-    private float longitude;
+    private double longitude;
     @ColumnInfo
     private boolean active;
 
-    public Airport(long id, @NonNull String name, @NonNull String city, @NonNull String foundationYear, float latitude, float longitude, boolean active) {
+    public Airport(long id, @NonNull String name, @NonNull String city, @NonNull String foundationYear, double latitude, double longitude, boolean active) {
         this.id = id;
         this.name = name;
         this.city = city;
@@ -74,7 +72,7 @@ public class Airport {
         this.foundationYear = foundationYear;
     }
 
-    public float getLatitude() {
+    public double getLatitude() {
         return latitude;
     }
 
@@ -82,7 +80,7 @@ public class Airport {
         this.latitude = latitude;
     }
 
-    public float getLongitude() {
+    public double getLongitude() {
         return longitude;
     }
 

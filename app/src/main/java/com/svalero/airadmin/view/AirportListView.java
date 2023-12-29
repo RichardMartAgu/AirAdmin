@@ -9,7 +9,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-
 import com.svalero.airadmin.R;
 import com.svalero.airadmin.adapter.AirportAdapter;
 import com.svalero.airadmin.contract.AirportListContract;
@@ -23,13 +22,11 @@ public class AirportListView extends AppCompatActivity implements AirportListCon
     private List<Airport> airports;
     private AirportAdapter adapter;
     private AirportListContract.Presenter presenter;
+
     @Override
-    protected void onCreate( Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_airport_list);
-
-        presenter = new AirportListPresenter(this);
-
         airports = new ArrayList<>();
         RecyclerView recyclerView = findViewById(R.id.airport_list);
         recyclerView.setHasFixedSize(true);
@@ -37,7 +34,10 @@ public class AirportListView extends AppCompatActivity implements AirportListCon
         recyclerView.setLayoutManager(new GridLayoutManager(this, 1));
         adapter = new AirportAdapter(airports);
         recyclerView.setAdapter(adapter);
+
+        presenter = new AirportListPresenter(this);
     }
+
     @Override
     protected void onResume() {
         super.onResume();
@@ -45,18 +45,23 @@ public class AirportListView extends AppCompatActivity implements AirportListCon
         presenter.loadAllAirports();
     }
 
-    public void goRegisterAirport (View view) {
+    public void goRegisterAirport(View view) {
         Intent intent = new Intent(this, AirportRegisterView.class);
         startActivity(intent);
     }
+
     @Override
-    public void listAirports(List<Airport> airports) {
+    public void listAllAirports(List<Airport> airports) {
         this.airports.clear();
         this.airports.addAll(airports);
         adapter.notifyDataSetChanged();
     }
+
     @Override
     public void showMessage(String message) {
         Toast.makeText(this, message, Toast.LENGTH_LONG).show();
     }
+
+
+
 }

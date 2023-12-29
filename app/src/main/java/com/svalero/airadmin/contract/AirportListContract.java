@@ -7,15 +7,15 @@ import java.util.List;
 public interface AirportListContract {
 
     interface Model {
-        interface OnLoadAirportListener {
-            void onLoadAirportSuccess(List<Airport> airport);
-            void onLoadAirportError(String message);
+        interface OnLoadAllAirportListener {
+            void onLoadAllAirportSuccess(List<Airport> airport);
+            void onLoadAllAirportError(String message);
         }
-        void loadAllAirports(OnLoadAirportListener listener);
+        void loadAllAirports(OnLoadAllAirportListener listener);
     }
 
     interface View {
-        void listAirports(List<Airport> airport);
+        void listAllAirports(List<Airport> airport);
 
         void showMessage(String message);
     }

@@ -6,11 +6,12 @@ import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 public class AirApi {
-    public static AirApiInterface buildInstance() {
+    public static AirportInterface buildInstance() {
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl(BASE_URL)
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
-        return retrofit.create(AirApiInterface.class);
+        return retrofit.create(AirportInterface.class);
     }
+
 }
