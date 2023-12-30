@@ -17,7 +17,8 @@ public interface AirportDetailsContract {
     }
 
     interface View {
-        void listOneAirport(Airport airport);
+        void listOneAirport(Airport airports);
+        void showMessage(Airport airport);
 
         void showMessage(String message);
     }

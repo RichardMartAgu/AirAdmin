@@ -1,5 +1,6 @@
 package com.svalero.airadmin.presenter;
 
+import com.svalero.airadmin.R;
 import com.svalero.airadmin.contract.AirportListContract;
 import com.svalero.airadmin.domain.Airport;
 import com.svalero.airadmin.model.AirportListModel;
@@ -15,14 +16,11 @@ public class AirportListPresenter implements AirportListContract.Presenter, Airp
         this.view = view;
         model = new AirportListModel();
     }
-    @Override
-    public void loadAllAirports() {
-        model.loadAllAirports(this);
-    }
+
 
     @Override
-    public void onLoadAllAirportSuccess(List<Airport> airport) {
-        view.listAllAirports(airport);
+    public void onLoadAllAirportSuccess(List<Airport> airports) {
+        view.listAirports(airports);
     }
 
     @Override
@@ -31,6 +29,9 @@ public class AirportListPresenter implements AirportListContract.Presenter, Airp
     }
 
 
-
+    @Override
+    public void loadAllAirports() {
+        model.loadAllAirports(this);
+    }
 }
 

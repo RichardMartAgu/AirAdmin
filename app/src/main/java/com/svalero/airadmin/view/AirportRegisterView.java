@@ -1,12 +1,12 @@
 package com.svalero.airadmin.view;
 
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.Toast;
+
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.svalero.airadmin.R;
@@ -14,7 +14,6 @@ import com.svalero.airadmin.contract.AirportRegisterContract;
 import com.svalero.airadmin.domain.Airport;
 import com.svalero.airadmin.presenter.AirportRegisterPresenter;
 import com.svalero.airadmin.utils.ValidatorUtil;
-
 
 public class AirportRegisterView extends AppCompatActivity implements AirportRegisterContract.View {
 
@@ -24,18 +23,18 @@ public class AirportRegisterView extends AppCompatActivity implements AirportReg
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_airport_register);
-        presenter = new AirportRegisterPresenter(this,this);
+        presenter = new AirportRegisterPresenter(this, this);
 
     }
 
 
     public void createAirport(View view) {
-        EditText addName = findViewById(R.id.add_airport_name);
-        EditText addCity = findViewById(R.id.add_airport_city);
-        EditText addFoundationYear = findViewById(R.id.add_airport_foundation_year);
-        EditText addLongitude = findViewById(R.id.add_airport_longitude);
-        EditText addLatitude = findViewById(R.id.add_airport_latitude);
-        CheckBox checkActive = findViewById(R.id.active);
+        EditText addName = findViewById(R.id.edit_airport_name);
+        EditText addCity = findViewById(R.id.edit_airport_city);
+        EditText addFoundationYear = findViewById(R.id.edit_airport_foundation_year);
+        EditText addLongitude = findViewById(R.id.edit_airport_longitude);
+        EditText addLatitude = findViewById(R.id.edit_airport_latitude);
+        CheckBox checkActive = findViewById(R.id.edit_active);
 
         if (ValidatorUtil.areEditTextsValid(addName, addCity, addFoundationYear, addLongitude, addLatitude)) {
             String name = addName.getText().toString();
@@ -87,6 +86,7 @@ public class AirportRegisterView extends AppCompatActivity implements AirportReg
     public void showMessage(String message) {
         Toast.makeText(this, message, Toast.LENGTH_LONG).show();
     }
+
     @Override
     public void showMessage(int stringId) {
         showMessage(getResources().getString(stringId));

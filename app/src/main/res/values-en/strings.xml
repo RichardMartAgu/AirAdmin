@@ -6,6 +6,19 @@
     <string name="active" >Active</string>
     <string name="here" >Here</string>
     <string name="registerOk" >Airport register successful</string>
+    <string name="details">details</string>
+    <string name="AirportList">Airport List</string>
+    <string name="AddAirport">Add new airport</string>
+    <string name="go_register_button_description">Go register button</string>
+    <string name="edit">Edit</string>
+    <string name="delete">Delete</string>
+    <string name="foundationYear">Foundation year:</string>
+    <string name="latitude">Latitude</string>
+    <string name="longitude">Longitude</string>
+    <string name="city">City</string>
+
+
+
 
 <!--    Errores-->
     <string name="error_unknown">Error Unknown</string>

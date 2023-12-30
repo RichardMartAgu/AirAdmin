@@ -33,6 +33,7 @@ dependencies {
     implementation("com.squareup.retrofit2:retrofit:2.9.0")
     implementation("com.squareup.retrofit2:converter-gson:2.7.2")
     implementation("androidx.room:room-runtime:2.6.1")
+    implementation ("androidx.swiperefreshlayout:swiperefreshlayout:1.1.0")
     implementation ("androidx.cardview:cardview:1.0.0")
     annotationProcessor("androidx.room:room-compiler:2.6.1")
     implementation("androidx.appcompat:appcompat:1.6.1")

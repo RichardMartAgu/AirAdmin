@@ -5,8 +5,21 @@
     <string name="active" >Con actividad</string>
     <string name="here" >Aquí</string>
     <string name="registerOk" >Aeropuerto registrado correctamente</string>
+    <string name="details">Detalles</string>
+    <string name="AirportList">Lista de aeropuertos</string>
+    <string name="AddAirport">Crear nuevo aeropuerto</string>
+    <string name="go_register_button_description">Botón para ir a la pantalla de registro</string>
+    <string name="edit">Editar</string>
+    <string name="delete">Eliminar</string>
+    <string name="foundationYear">Año de fundación:</string>
+    <string name="latitude">Latitud</string>
+    <string name="longitude">Longitud</string>
+    <string name="city">Ciudad</string>
 
 <!--    Errores-->
     <string name="error_unknown">Error desconocido</string>
     <string name="error_response">Error al procesar la respuesta de error</string>
+
+
+
 </resources>

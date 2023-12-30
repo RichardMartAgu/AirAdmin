@@ -10,6 +10,7 @@ import retrofit2.http.Body;
 import retrofit2.http.DELETE;
 import retrofit2.http.GET;
 import retrofit2.http.POST;
+import retrofit2.http.PUT;
 import retrofit2.http.Path;
 
 public interface AirportInterface {
@@ -23,7 +24,10 @@ public interface AirportInterface {
     Call<Airport> addAirport(@Body Airport airport);
 
     @DELETE("airport/{airportId}")
-    Call<Void> deleteAirport(@Path("airportId") long airportId);
+    Call<Airport> deleteAirportById(@Path("airportId")long airportId );
+
+    @PUT("airport/{airportId}")
+    Call<Airport> editAirportById(@Path("airportId")long airportId,@Body Airport airport);
 
 
 }

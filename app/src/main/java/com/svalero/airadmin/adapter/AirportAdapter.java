@@ -38,7 +38,6 @@ public class AirportAdapter extends RecyclerView.Adapter<AirportAdapter.AirportH
     @Override
     public void onBindViewHolder(@NonNull AirportAdapter.AirportHolder holder, int position) {
         Airport airport = this.airport.get(position);
-        Log.d("AirportAdapter", "Airport ID: " + airport.getId());
 
         holder.airportId.setText(String.valueOf(airport.getId()));
         holder.airportName.setText(airport.getName());
@@ -54,7 +53,6 @@ public class AirportAdapter extends RecyclerView.Adapter<AirportAdapter.AirportH
         public TextView airportId;
         public TextView airportName;
         public Button detailsButton;
-
         public View parentView;
 
         public AirportHolder(@NonNull View view) {
