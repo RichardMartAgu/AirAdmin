@@ -1,8 +1,7 @@
-package com.svalero.airadmin.presenter;
+package com.svalero.airadmin.presenter.airportsPresenters;
 
-import com.svalero.airadmin.contract.AirportDeleteContract;
-import com.svalero.airadmin.domain.Airport;
-import com.svalero.airadmin.model.AirportDeleteModel;
+import com.svalero.airadmin.contract.airportsContracts.AirportDeleteContract;
+import com.svalero.airadmin.model.airportsModel.AirportDeleteModel;
 
 public class AirportDeletePresenter implements AirportDeleteContract.Presenter, AirportDeleteContract.Model.OnLoadDeleteOneAirportListener {
     private AirportDeleteContract.View view;

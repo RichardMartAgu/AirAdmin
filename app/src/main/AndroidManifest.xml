@@ -18,19 +18,34 @@
         tools:targetApi="31"
         android:usesCleartextTraffic="true">
         <activity
-            android:name=".view.AirportEditView"
+            android:name=".view.airplanesViews.AirplaneEditView"
+            android:label="Edit airplanes">
+        </activity>
+        <activity
+            android:name=".view.airplanesViews.AirplaneDetailsView"
+            android:label="Airplane Details">
+        </activity>
+        <activity android:name=".view.airplanesViews.AirplaneListView"
+            android:label="Airplane list">
+
+        </activity>
+        <activity android:name=".view.airplanesViews.AirplaneRegisterView"
+            android:label="Register airplane">
+        </activity>
+        <activity
+            android:name=".view.airportsViews.AirportEditView"
             android:label="Edit airport">
         </activity>
         <activity
-            android:name=".view.AirportDetailsView"
+            android:name=".view.airportsViews.AirportDetailsView"
             android:label="Airport Details">
         </activity>
-        <activity android:name=".view.AirportListView"
-            android:exported="false">
+        <activity android:name=".view.airportsViews.AirportListView"
+            android:label="Airport list">
 
         </activity>
-        <activity android:name=".view.AirportRegisterView"
-            android:exported="false">
+        <activity android:name=".view.airportsViews.AirportRegisterView"
+            android:label="Register airport">
 
         </activity>
         <activity

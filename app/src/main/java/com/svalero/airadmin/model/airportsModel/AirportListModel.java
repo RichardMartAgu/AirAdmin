@@ -1,10 +1,10 @@
-package com.svalero.airadmin.model;
+package com.svalero.airadmin.model.airportsModel;
 
 import android.util.Log;
 
-import com.svalero.airadmin.api.AirApi;
+import com.svalero.airadmin.api.AirportApi;
 import com.svalero.airadmin.api.AirportInterface;
-import com.svalero.airadmin.contract.AirportListContract;
+import com.svalero.airadmin.contract.airportsContracts.AirportListContract;
 import com.svalero.airadmin.domain.Airport;
 
 import java.util.List;
@@ -16,8 +16,8 @@ import retrofit2.Response;
 public class AirportListModel implements AirportListContract.Model {
 
     @Override
-    public void loadAllAirports(OnLoadAllAirportListener listener) {
-        AirportInterface api = AirApi.buildInstance();
+    public void loadAllAirports(AirportListContract.Model.OnLoadAllAirportListener listener) {
+        AirportInterface api = AirportApi.buildInstance();
         Call<List<Airport>> getAirportCall = api.getAirports();
         getAirportCall.enqueue(new Callback<List<Airport>>() {
             @Override

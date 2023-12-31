@@ -8,6 +8,8 @@ import android.view.Menu;
 import android.view.View;
 
 import com.svalero.airadmin.R;
+import com.svalero.airadmin.view.airplanesViews.AirplaneListView;
+import com.svalero.airadmin.view.airportsViews.AirportListView;
 
 public class IndexView extends AppCompatActivity {
 
@@ -24,6 +26,10 @@ public class IndexView extends AppCompatActivity {
 
     public void goListAirports(View view){
         Intent intent = new Intent(this, AirportListView.class);
+        startActivity(intent);
+    }
+    public void goListAirplanes(View view){
+        Intent intent = new Intent(this, AirplaneListView.class);
         startActivity(intent);
     }
 }

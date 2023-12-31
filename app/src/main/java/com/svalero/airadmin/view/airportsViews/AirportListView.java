@@ -1,4 +1,4 @@
-package com.svalero.airadmin.view;
+package com.svalero.airadmin.view.airportsViews;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -14,9 +14,9 @@ import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.svalero.airadmin.R;
 import com.svalero.airadmin.adapter.AirportAdapter;
-import com.svalero.airadmin.contract.AirportListContract;
+import com.svalero.airadmin.contract.airportsContracts.AirportListContract;
 import com.svalero.airadmin.domain.Airport;
-import com.svalero.airadmin.presenter.AirportListPresenter;
+import com.svalero.airadmin.presenter.airportsPresenters.AirportListPresenter;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -7,8 +7,9 @@
     <string name="here" >Here</string>
     <string name="registerOk" >Airport register successful</string>
     <string name="details">details</string>
-    <string name="AirportList">Airport List</string>
-    <string name="AddAirport">Add new airport</string>
+    <string name="airportList">Airport List</string>
+    <string name="airplaneList">Airplanes list</string>
+    <string name="addAirport">Add new airport</string>
     <string name="go_register_button_description">Go register button</string>
     <string name="edit">Edit</string>
     <string name="delete">Delete</string>
@@ -16,11 +17,23 @@
     <string name="latitude">Latitude</string>
     <string name="longitude">Longitude</string>
     <string name="city">City</string>
-
-
+    <string name="editAirport">Edit airport</string>
+    <string name="aditAirplane">Editar avión</string>
+    <string name="newAirport">Register new airport</string>
+    <string name="newAirplane">Register new airplane</string>
+    <string name="register">Register</string>
+    <string name="name">Name</string>
+    <string name="model">Model</string>
+    <string name="titleNewAirplane">Register a New Airplane</string>
+    <string name="manufacturingDate">Assembly date</string>
+    <string name="passengerCapacity">Passenger capacity</string>
+    <string name="maxSpeed">Max speed</string>
+    <string name="airplanes">Airplanes</string>
 
 
 <!--    Errores-->
     <string name="error_unknown">Error Unknown</string>
     <string name="error_response">Error processing response</string>
+
+
 </resources>

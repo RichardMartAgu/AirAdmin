@@ -9,7 +9,7 @@
 
     <androidx.cardview.widget.CardView
 
-        android:layout_width="match_parent"
+        android:layout_width="395dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginTop="8dp"
@@ -22,64 +22,45 @@
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:padding="20dp">
 
+
             <TextView
-                android:id="@+id/airport_details_name"
+                android:id="@+id/airplane_details_model"
                 android:layout_width="wrap_content"
                 android:layout_height="27dp"
-                android:layout_marginStart="20dp"
+                android:layout_marginTop="5dp"
                 android:text="TextView"
                 android:textSize="20sp"
                 android:textStyle="bold"
-                app:layout_constraintStart_toEndOf="@+id/airport_details_id"
+                app:layout_constraintStart_toEndOf="@+id/airplane_details_id"
                 app:layout_constraintTop_toTopOf="parent" />
-
-            <TextView
-                android:id="@+id/airport_details_city"
-                android:layout_width="wrap_content"
-                android:layout_height="27dp"
-                android:text="TextView"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textViewCity3" />
-
-            <TextView
-                android:id="@+id/textViewCity3"
-                android:layout_width="wrap_content"
-                android:layout_height="27dp"
-                android:layout_marginTop="30dp"
-                android:text="@string/city"
-                android:textColor="#E53935"
-                android:textStyle="bold"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/airport_details_id" />
 
             <TextView
                 android:id="@+id/textViewCity"
                 android:layout_width="wrap_content"
                 android:layout_height="0dp"
-                android:layout_marginEnd="60dp"
-                android:text="@string/latitude"
+                android:layout_marginTop="20dp"
+                android:text="@string/maxSpeed"
                 android:textColor="#E53935"
                 android:textStyle="bold"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="@+id/textViewCity2"
-                app:layout_constraintTop_toTopOf="@+id/textViewCity3" />
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/airplane_details_passenger_capacity" />
 
             <TextView
                 android:id="@+id/textViewCity2"
                 android:layout_width="wrap_content"
                 android:layout_height="0dp"
-                android:layout_marginEnd="60dp"
-                android:text="@string/longitude"
+                android:layout_marginTop="20dp"
+                android:text="@string/passengerCapacity"
                 android:textColor="#E53935"
                 android:textStyle="bold"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="@+id/textViewFoundationYear2" />
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/airplane_details_manufacturing_date" />
 
             <TextView
-                android:id="@+id/airport_details_foundation_year"
+                android:id="@+id/airplane_details_manufacturing_date"
                 android:layout_width="wrap_content"
                 android:layout_height="27dp"
                 android:text="TextView"
@@ -90,55 +71,62 @@
                 android:id="@+id/textViewFoundationYear2"
                 android:layout_width="wrap_content"
                 android:layout_height="27dp"
-                android:layout_marginTop="10dp"
-                android:text="@string/foundationYear"
+                android:layout_marginTop="20dp"
+                android:text="@string/manufacturingDate"
                 android:textColor="#E53935"
                 android:textStyle="bold"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/airport_details_city" />
+                app:layout_constraintTop_toBottomOf="@+id/airplane_details_id" />
 
             <CheckBox
-                android:id="@+id/edit_active"
+                android:id="@+id/airplane_details_active"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
                 android:enabled="false"
                 android:text="@string/active"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toStartOf="@+id/airport_details_foundation_year"
-                app:layout_constraintTop_toBottomOf="@+id/airport_details_foundation_year"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/airplane_details_max_speed"
                 app:layout_constraintVertical_bias="0.102" />
 
             <Button
-                android:id="@+id/airport_delete_buton"
+                android:id="@+id/airplane_delete_buton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:layout_marginEnd="20dp"
                 android:backgroundTint="#DD2C00"
-                android:onClick="deleteOneAirport"
+                android:onClick="deleteOneAirplane"
                 android:text="@string/delete"
-                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintBottom_toBottomOf="@+id/airplane_details_active"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/airport_edit_buton" />
+                app:layout_constraintTop_toBottomOf="@+id/airplane_edit_button"
+                app:layout_constraintVertical_bias="0.385" />
 
             <TextView
-                android:id="@+id/airport_details_latitude"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:id="@+id/airplane_details_passenger_capacity"
+                android:layout_width="0dp"
+                android:layout_height="19dp"
+                android:layout_marginTop="5dp"
                 android:text="TextView"
-                app:layout_constraintStart_toStartOf="@+id/textViewCity"
-                app:layout_constraintTop_toBottomOf="@+id/textViewCity" />
-
-            <TextView
-                android:id="@+id/airport_details_longitude"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="TextView"
-                app:layout_constraintStart_toStartOf="@+id/textViewCity2"
+                app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/textViewCity2" />
 
             <TextView
-                android:id="@+id/airport_details_id"
+                android:id="@+id/airplane_details_max_speed"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:text="TextView"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textViewCity" />
+
+            <TextView
+                android:id="@+id/airplane_details_id"
                 android:layout_width="wrap_content"
                 android:layout_height="27dp"
+                android:layout_marginTop="5dp"
                 android:gravity="center"
                 android:text="TextView"
                 android:textSize="20sp"
@@ -146,18 +134,16 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
             <Button
-                android:id="@+id/airport_edit_buton"
+                android:id="@+id/airplane_edit_button"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                android:layout_marginEnd="76dp"
+                android:layout_marginTop="190dp"
+                android:layout_marginEnd="28dp"
                 android:backgroundTint="#FF6D00"
-                android:onClick="goEditOneAirport"
+                android:onClick="goEditOneAirplane"
                 android:text="@string/edit"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toStartOf="@+id/airport_delete_buton"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/edit_active" />
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.cardview.widget.CardView>

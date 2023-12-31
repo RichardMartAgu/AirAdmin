@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:padding="10dp">
 
     <Button
-        android:id="@+id/button_details_airport"
+        android:id="@+id/button_details_airplane"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="15dp"
+        android:onClick="goDetailsAirplane"
         android:text="@string/details"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -18,7 +18,7 @@
         app:layout_constraintVertical_bias="0.626" />
 
     <TextView
-        android:id="@+id/airport_item_name"
+        android:id="@+id/airplane_item_model"
         android:layout_width="wrap_content"
         android:layout_height="47dp"
         android:layout_marginStart="12dp"
@@ -28,15 +28,15 @@
         android:padding="5dp"
         android:paddingVertical="10dp"
         android:paddingTop="10dp"
-        android:text="Aeropuerto de Barcelona"
+        android:text="Boeing 737"
         android:textAllCaps="false"
         android:textSize="19dp"
         android:textStyle="bold"
-        app:layout_constraintStart_toEndOf="@+id/airport_item_id"
+        app:layout_constraintStart_toEndOf="@+id/airplane_item_id"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/airport_item_id"
+        android:id="@+id/airplane_item_id"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="23dp"

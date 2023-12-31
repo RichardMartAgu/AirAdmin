@@ -2,12 +2,13 @@
     <string name="app_name">AirAdmin</string>
     <string name="airports">aeropuertos</string>
     <string name="inactive" >Sin actividad</string>
-    <string name="active" >Con actividad</string>
+    <string name="active" >Activo</string>
     <string name="here" >Aquí</string>
     <string name="registerOk" >Aeropuerto registrado correctamente</string>
     <string name="details">Detalles</string>
-    <string name="AirportList">Lista de aeropuertos</string>
-    <string name="AddAirport">Crear nuevo aeropuerto</string>
+    <string name="airportList">Lista de aeropuertos</string>
+    <string name="airplaneList">Lista de aviones</string>
+    <string name="addAirport">Crear nuevo aeropuerto</string>
     <string name="go_register_button_description">Botón para ir a la pantalla de registro</string>
     <string name="edit">Editar</string>
     <string name="delete">Eliminar</string>
@@ -15,6 +16,18 @@
     <string name="latitude">Latitud</string>
     <string name="longitude">Longitud</string>
     <string name="city">Ciudad</string>
+    <string name="newAirport">Registrar nuevo aeropuerto</string>
+    <string name="newAirplane">Registrar nuevo avión</string>
+    <string name="register">Registrar</string>
+    <string name="name">Nombre</string>
+    <string name="editAirport">Editar aeropuerto</string>
+    <string name="aditAirplane">Editar avión</string>
+    <string name="model">modelo</string>
+    <string name="titleNewAirplane">Registrar nuevo avión</string>
+    <string name="manufacturingDate">Fecha de montaje</string>7
+    <string name="passengerCapacity">Capacidad de pasajeros</string>
+    <string name="maxSpeed">Velocidad máxima</string>
+    <string name="airplanes">Aviones</string>
 
 <!--    Errores-->
     <string name="error_unknown">Error desconocido</string>

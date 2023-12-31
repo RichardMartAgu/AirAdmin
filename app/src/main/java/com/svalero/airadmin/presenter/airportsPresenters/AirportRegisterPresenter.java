@@ -1,18 +1,18 @@
-package com.svalero.airadmin.presenter;
+package com.svalero.airadmin.presenter.airportsPresenters;
 
 import android.content.Context;
 
 import com.svalero.airadmin.R;
-import com.svalero.airadmin.contract.AirportRegisterContract;
+import com.svalero.airadmin.contract.airportsContracts.AirportRegisterContract;
 import com.svalero.airadmin.domain.Airport;
-import com.svalero.airadmin.model.AirportRegisterModel;
+import com.svalero.airadmin.model.airportsModel.AirportRegisterModel;
 
 public class AirportRegisterPresenter implements AirportRegisterContract.Presenter, AirportRegisterContract.Model.OnRegisterAirportListener {
 
     private AirportRegisterContract.View view;
     private AirportRegisterContract.Model model;
 
-    public AirportRegisterPresenter(AirportRegisterContract.View view ,Context context) {
+    public AirportRegisterPresenter(AirportRegisterContract.View view , Context context) {
         this.view = view;
         model = new AirportRegisterModel(context);
     }

@@ -30,8 +30,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:onClick="goListAirplanes"
             android:padding="25dp"
-            android:text="@string/airports" />
+            android:text="@string/airplanes" />
     </LinearLayout>
 
     <LinearLayout

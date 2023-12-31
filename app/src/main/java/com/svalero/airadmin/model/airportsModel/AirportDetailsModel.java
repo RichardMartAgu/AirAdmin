@@ -1,10 +1,10 @@
-package com.svalero.airadmin.model;
+package com.svalero.airadmin.model.airportsModel;
 
 import android.util.Log;
 
-import com.svalero.airadmin.api.AirApi;
+import com.svalero.airadmin.api.AirportApi;
 import com.svalero.airadmin.api.AirportInterface;
-import com.svalero.airadmin.contract.AirportDetailsContract;
+import com.svalero.airadmin.contract.airportsContracts.AirportDetailsContract;
 import com.svalero.airadmin.domain.Airport;
 
 import org.json.JSONException;
@@ -18,8 +18,8 @@ import retrofit2.Response;
 
 public class AirportDetailsModel implements AirportDetailsContract.Model {
 
-    public void loadOneAirport(long airportId, OnLoadOneAirportListener listener) {
-        AirportInterface api = AirApi.buildInstance();
+    public void loadOneAirport(long airportId, AirportDetailsContract.Model.OnLoadOneAirportListener listener) {
+        AirportInterface api = AirportApi.buildInstance();
         Call<Airport> getAirportCall = api.getAirportById(airportId);
         getAirportCall.enqueue(new Callback<Airport>() {
             @Override

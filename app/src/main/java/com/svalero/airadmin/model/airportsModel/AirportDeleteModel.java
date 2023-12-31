@@ -1,10 +1,10 @@
-package com.svalero.airadmin.model;
+package com.svalero.airadmin.model.airportsModel;
 
 import android.util.Log;
 
-import com.svalero.airadmin.api.AirApi;
+import com.svalero.airadmin.api.AirportApi;
 import com.svalero.airadmin.api.AirportInterface;
-import com.svalero.airadmin.contract.AirportDeleteContract;
+import com.svalero.airadmin.contract.airportsContracts.AirportDeleteContract;
 import com.svalero.airadmin.domain.Airport;
 
 import retrofit2.Call;
@@ -16,7 +16,7 @@ public class AirportDeleteModel implements AirportDeleteContract.Model {
 
     @Override
     public void loadDeleteOneAirport(long airportId, OnLoadDeleteOneAirportListener listener) {
-        AirportInterface api = AirApi.buildInstance();
+        AirportInterface api = AirportApi.buildInstance();
         Call<Airport> deleteAirportCall = api.deleteAirportById(airportId);
         deleteAirportCall.enqueue(new Callback<Airport>() {
             @Override

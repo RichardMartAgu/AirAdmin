@@ -1,13 +1,8 @@
-package com.svalero.airadmin.presenter;
+package com.svalero.airadmin.presenter.airportsPresenters;
 
-import com.svalero.airadmin.contract.AirportDetailsContract;
+import com.svalero.airadmin.contract.airportsContracts.AirportDetailsContract;
 import com.svalero.airadmin.domain.Airport;
-import com.svalero.airadmin.model.AirportDetailsModel;
-
-
-import java.util.List;
-
-import retrofit2.Callback;
+import com.svalero.airadmin.model.airportsModel.AirportDetailsModel;
 
 public class AirportDetailsPresenter implements AirportDetailsContract.Presenter, AirportDetailsContract.Model.OnLoadOneAirportListener {
 

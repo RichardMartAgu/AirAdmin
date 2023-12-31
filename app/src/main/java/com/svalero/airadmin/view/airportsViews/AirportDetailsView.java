@@ -1,10 +1,9 @@
-package com.svalero.airadmin.view;
+package com.svalero.airadmin.view.airportsViews;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
-import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -12,12 +11,12 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.svalero.airadmin.R;
-import com.svalero.airadmin.contract.AirportDeleteContract;
-import com.svalero.airadmin.contract.AirportDetailsContract;
-import com.svalero.airadmin.contract.AirportEditContract;
+import com.svalero.airadmin.contract.airportsContracts.AirportDeleteContract;
+import com.svalero.airadmin.contract.airportsContracts.AirportDetailsContract;
+import com.svalero.airadmin.contract.airportsContracts.AirportEditContract;
 import com.svalero.airadmin.domain.Airport;
-import com.svalero.airadmin.presenter.AirportDeletePresenter;
-import com.svalero.airadmin.presenter.AirportDetailsPresenter;
+import com.svalero.airadmin.presenter.airportsPresenters.AirportDeletePresenter;
+import com.svalero.airadmin.presenter.airportsPresenters.AirportDetailsPresenter;
 
 public class AirportDetailsView extends AppCompatActivity implements AirportDetailsContract.View, AirportDeleteContract.View, AirportEditContract.View {
 

@@ -1,9 +1,10 @@
-package com.svalero.airadmin.presenter;
+package com.svalero.airadmin.presenter.airportsPresenters;
 
 import android.content.Context;
-import com.svalero.airadmin.contract.AirportEditContract;
+
+import com.svalero.airadmin.contract.airportsContracts.AirportEditContract;
 import com.svalero.airadmin.domain.Airport;
-import com.svalero.airadmin.model.AirportEditModel;
+import com.svalero.airadmin.model.airportsModel.AirportEditModel;
 
 public class AirportEditPresenter implements AirportEditContract.Presenter, AirportEditContract.Model.OnLoadEditOneAirportListener {
 
