@@ -1,4 +1,4 @@
-package com.svalero.airadmin.view.airportsViews;
+package com.svalero.airadmin.view.airplanesViews;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -16,39 +16,38 @@ import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.svalero.airadmin.R;
-import com.svalero.airadmin.adapter.AirportAdapter;
-import com.svalero.airadmin.contract.airportsContracts.AirportListContract;
-import com.svalero.airadmin.domain.Airport;
-import com.svalero.airadmin.presenter.airportsPresenters.AirportListPresenter;
+import com.svalero.airadmin.adapter.AirplaneAdapter;
+import com.svalero.airadmin.contract.airplanesContracts.AirportListContract;
+import com.svalero.airadmin.domain.Airplane;
+import com.svalero.airadmin.presenter.airplanesPresenters.AirplaneListPresenter;
 import com.svalero.airadmin.view.IndexView;
-import com.svalero.airadmin.view.airplanesViews.AirplaneListView;
-import com.svalero.airadmin.view.airplanesViews.FavoritesAirplaneListView;
+import com.svalero.airadmin.view.airportsViews.AirportListView;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class AirportListView extends AppCompatActivity implements AirportListContract.View {
-    private List<Airport> airports;
-    private AirportAdapter adapter;
+public class AirplaneListView extends AppCompatActivity implements AirportListContract.View {
+    private List<Airplane> airplane;
+    private AirplaneAdapter adapter;
     private AirportListContract.Presenter presenter;
     private SwipeRefreshLayout swipeRefreshLayout;
-       
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_airport_list);
+        setContentView(R.layout.activity_airplane_list);
 
-        airports = new ArrayList<>();
+        airplane = new ArrayList<>();
 
-        RecyclerView recyclerView = findViewById(R.id.airport_list);
+        RecyclerView recyclerView = findViewById(R.id.airplane_list);
         recyclerView.setHasFixedSize(true);
         LinearLayoutManager layoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(new GridLayoutManager(this, 1));
-        adapter = new AirportAdapter(airports);
+        adapter = new AirplaneAdapter(airplane);
         recyclerView.setAdapter(adapter);
 
-        presenter = new AirportListPresenter(this);
+        presenter = new AirplaneListPresenter(this);
 
         swipeRefreshLayout = findViewById(R.id.swipe_refresh_layout);
         swipeRefreshLayout.setOnRefreshListener(this::loadStationsData);
@@ -57,7 +56,7 @@ public class AirportListView extends AppCompatActivity implements AirportListCon
 
     private void loadStationsData() {
         new Handler().postDelayed(() -> {
-            presenter.loadAllAirports();
+            presenter.loadAllAirplanes();
         }, 1000);
     }
 
@@ -65,30 +64,20 @@ public class AirportListView extends AppCompatActivity implements AirportListCon
     protected void onResume() {
         super.onResume();
 
-        presenter.loadAllAirports();
+        presenter.loadAllAirplanes();
     }
 
-    public void goRegisterAirport(View view) {
-        Intent intent = new Intent(this, AirportRegisterView.class);
+    public void goRegisterAirplane(View view) {
+        Intent intent = new Intent(this, AirplaneRegisterView.class);
         startActivity(intent);
     }
 
     @Override
-    public void listAirports(List<Airport> airports) {
-        this.airports.clear();
-        this.airports.addAll(airports);
+    public void listAirplane(List<Airplane> airplanes) {
+        this.airplane.clear();
+        this.airplane.addAll(airplanes);
         adapter.notifyDataSetChanged();
         swipeRefreshLayout.setRefreshing(false);
-    }
-
-    @Override
-    public void showMessage(int stringId) {
-
-    }
-
-    @Override
-    public void showMessage(String message) {
-        Toast.makeText(this, message, Toast.LENGTH_LONG).show();
     }
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -120,6 +109,17 @@ public class AirportListView extends AppCompatActivity implements AirportListCon
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+
+    @Override
+    public void showMessage(int stringId) {
+
+    }
+
+    @Override
+    public void showMessage(String message) {
+        Toast.makeText(this, message, Toast.LENGTH_LONG).show();
     }
 
 

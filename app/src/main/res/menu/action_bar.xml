@@ -1,9 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:android="http://schemas.android.com/apk/res/android">
-    <item android:title="Índex" />
     <item
+        android:id="@+id/volver"
+        android:icon="@android:drawable/ic_menu_revert"
+        android:title="Índex"
+        app:showAsAction="always" />
+    <item
+        android:id="@+id/airports"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:title="Aeropuertos" />
+    <item
+        android:id="@+id/airplanes"
+        android:title="Aviones" />
+    <item
+        android:id="@+id/fav_airplanes"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:title="Aviones Favoritos" />
 </menu>
