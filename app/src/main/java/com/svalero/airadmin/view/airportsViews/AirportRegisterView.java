@@ -12,6 +12,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.mapbox.geojson.Point;
+import com.mapbox.maps.CameraOptions;
 import com.mapbox.maps.MapView;
 import com.mapbox.maps.Style;
 import com.mapbox.maps.plugin.annotation.AnnotationConfig;
@@ -31,6 +32,7 @@ import com.svalero.airadmin.utils.ValidatorUtil;
 
 public class AirportRegisterView extends AppCompatActivity implements Style.OnStyleLoaded,
         OnMapClickListener, AirportRegisterContract.View {
+
     private MapView mapView;
     private PointAnnotationManager pointAnnotationManager;
     private GesturesPlugin gesturesPlugin;
@@ -49,8 +51,10 @@ public class AirportRegisterView extends AppCompatActivity implements Style.OnSt
 
         gesturesPlugin = GesturesUtils.getGestures(mapView);
         gesturesPlugin.addOnMapClickListener(this);
-    }
 
+        Point point = (Point.fromLngLat(-4.25,41.29));
+        setCameraPosition(point);
+    }
 
     public void createAirport(View view) {
         EditText addName = findViewById(R.id.add_airport_name);
@@ -78,7 +82,6 @@ public class AirportRegisterView extends AppCompatActivity implements Style.OnSt
                 showMessage("Por favor, completa el campo de latitud");
                 return;
             }
-
 
             double longitude;
             String longitudeText = addLongitude.getText().toString();
@@ -128,13 +131,21 @@ public class AirportRegisterView extends AppCompatActivity implements Style.OnSt
         airportLatitude.setText(String.valueOf(point.latitude()));
         EditText airportLongitude = findViewById(R.id.add_airport_latitude);
         airportLongitude.setText(String.valueOf(point.longitude()));
-
         return false;
     }
 
     @Override
     public void onStyleLoaded(@NonNull Style style) {
 
+    }
+    private void setCameraPosition(Point point) {
+        CameraOptions cameraPosition = new CameraOptions.Builder()
+                .center(point)
+                .pitch(0.0)
+                .zoom(5.0)
+                .bearing(-17.6)
+                .build();
+        mapView.getMapboxMap().setCamera(cameraPosition);
     }
     @Override
     public void showMessage(String message) {

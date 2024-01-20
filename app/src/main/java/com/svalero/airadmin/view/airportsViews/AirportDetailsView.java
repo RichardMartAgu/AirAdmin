@@ -1,6 +1,7 @@
 package com.svalero.airadmin.view.airportsViews;
 
 import android.content.Intent;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -8,8 +9,22 @@ import android.widget.CheckBox;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.mapbox.geojson.Point;
+import com.mapbox.maps.CameraOptions;
+import com.mapbox.maps.MapView;
+import com.mapbox.maps.Style;
+import com.mapbox.maps.plugin.annotation.AnnotationConfig;
+import com.mapbox.maps.plugin.annotation.AnnotationPlugin;
+import com.mapbox.maps.plugin.annotation.AnnotationPluginImplKt;
+import com.mapbox.maps.plugin.annotation.generated.PointAnnotationManager;
+import com.mapbox.maps.plugin.annotation.generated.PointAnnotationManagerKt;
+import com.mapbox.maps.plugin.annotation.generated.PointAnnotationOptions;
+import com.mapbox.maps.plugin.gestures.GesturesPlugin;
+import com.mapbox.maps.plugin.gestures.GesturesUtils;
+import com.mapbox.maps.plugin.gestures.OnMapClickListener;
 import com.svalero.airadmin.R;
 import com.svalero.airadmin.contract.airportsContracts.AirportDeleteContract;
 import com.svalero.airadmin.contract.airportsContracts.AirportDetailsContract;
@@ -18,8 +33,9 @@ import com.svalero.airadmin.domain.Airport;
 import com.svalero.airadmin.presenter.airportsPresenters.AirportDeletePresenter;
 import com.svalero.airadmin.presenter.airportsPresenters.AirportDetailsPresenter;
 
-public class AirportDetailsView extends AppCompatActivity implements AirportDetailsContract.View, AirportDeleteContract.View, AirportEditContract.View {
-
+public class AirportDetailsView extends AppCompatActivity implements AirportDetailsContract.View, AirportDeleteContract.View, AirportEditContract.View, Style.OnStyleLoaded{
+    private MapView mapViewDetails;
+    private PointAnnotationManager pointAnnotationManager;
     private long airportId;
     private String name;
     private String foundationYear;
@@ -37,6 +53,10 @@ public class AirportDetailsView extends AppCompatActivity implements AirportDeta
 
         airportId = getIntent().getLongExtra("airport_item_id", 2);
         detailsPresenter.loadOneAirport(airportId);
+
+        mapViewDetails = findViewById(R.id.add_mapViewDetails);
+        mapViewDetails.getMapboxMap().loadStyleUri(Style.MAPBOX_STREETS, this);
+
 
     }
 
@@ -59,8 +79,11 @@ public class AirportDetailsView extends AppCompatActivity implements AirportDeta
         airportLongitude.setText(String.valueOf(airport.getLongitude()));
         String foundationYear = airport.getFoundationYear();
         airportFoundationYear.setText(foundationYear);
-
         active.setChecked(airport.isActive());
+
+        Point point = (Point.fromLngLat(airport.getLongitude(), airport.getLatitude()));
+        setCameraPosition(point);
+
     }
 
     public void deleteOneAirport(View view) {
@@ -68,7 +91,6 @@ public class AirportDetailsView extends AppCompatActivity implements AirportDeta
         showMessage("Aeropuerto eliminado exitosamente");
         Intent intent = new Intent(AirportDetailsView.this, AirportListView.class);
         startActivity(intent);
-
     }
 
     public void goEditOneAirport(View view) {
@@ -96,16 +118,26 @@ public class AirportDetailsView extends AppCompatActivity implements AirportDeta
         view.getContext().startActivity(intent);
 
     }
+    @Override
+    public void onStyleLoaded(@NonNull Style style) {
+    }
 
+    private void setCameraPosition(Point point) {
+        CameraOptions cameraPosition = new CameraOptions.Builder()
+                .center(point)
+                .pitch(0.0)
+                .zoom(11.0)
+                .bearing(-17.6)
+                .build();
+        mapViewDetails.getMapboxMap().setCamera(cameraPosition);
+    }
 
     @Override
     public void showMessage(int stringId) {
-
     }
 
     @Override
     public void showMessage(Airport airport) {
-
     }
 
     @Override
@@ -113,4 +145,6 @@ public class AirportDetailsView extends AppCompatActivity implements AirportDeta
 
         Toast.makeText(this, message, Toast.LENGTH_LONG).show();
     }
+
+
 }
