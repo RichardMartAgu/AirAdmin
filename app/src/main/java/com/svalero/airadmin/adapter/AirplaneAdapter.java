@@ -10,24 +10,32 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
-import androidx.room.Room;
 
 import com.svalero.airadmin.R;
 import com.svalero.airadmin.db.AppDatabase;
 import com.svalero.airadmin.domain.Airplane;
+
 import com.svalero.airadmin.domain.FavoriteAirplane;
 import com.svalero.airadmin.view.airplanesViews.AirplaneDetailsView;
+import com.svalero.airadmin.view.airplanesViews.AirplaneListView;
 
 import java.util.List;
 
 public class AirplaneAdapter extends RecyclerView.Adapter<AirplaneAdapter.AirplaneHolder> {
 
+    private AirplaneListView parentActivity;
     private List<Airplane> airplane;
+    private AppDatabase database;
 
 
-    public AirplaneAdapter(List<Airplane> airplane) {
+
+    public AirplaneAdapter(List<Airplane> airplane, AirplaneListView parentActivity) {
         this.airplane = airplane;
+        this.parentActivity = parentActivity;
+    }
 
+    public void setDatabase(AppDatabase database) {
+        this.database = database;
     }
 
     @NonNull
@@ -45,38 +53,43 @@ public class AirplaneAdapter extends RecyclerView.Adapter<AirplaneAdapter.Airpla
         holder.airplaneId.setText(String.valueOf(airplane.getId()));
         holder.airplaneModel.setText(airplane.getModel());
 
-        final AppDatabase db = Room.databaseBuilder(holder.parentView.getContext(), AppDatabase.class, "favoriteAirplaneDao")
-                .allowMainThreadQueries().build();
 
         long airplaneId = airplane.getId();
 
-        FavoriteAirplane favoriteAirplane = db.favoriteAirplaneDao().getFavoriteAirplane(String.valueOf(airplaneId));
+
+        FavoriteAirplane favoriteAirplane = database.favoriteAirplaneDao().getFavoriteAirplane(String.valueOf(airplaneId));
 
         long roomId = (favoriteAirplane != null) ? Long.parseLong(favoriteAirplane.getId()) : -1;
 
         if (airplaneId == roomId) {
-            holder.airplaneFavBtn.setImageResource(android.R.drawable.star_big_on);
+            holder.airplaneFavBtn.setImageResource(R.drawable.fav_lleno);
             holder.airplaneFavBtn.setSelected(true);
+
         } else {
-            holder.airplaneFavBtn.setImageResource(android.R.drawable.star_big_off);
+            holder.airplaneFavBtn.setImageResource(R.drawable.fav_vacio);
             holder.airplaneFavBtn.setSelected(false);
         }
 
 
         holder.airplaneFavBtn.setOnClickListener(v -> {
 
-            FavoriteAirplane updatedFavoriteAirplane = db.favoriteAirplaneDao().getFavoriteAirplane(String.valueOf(airplaneId));
+            FavoriteAirplane updatedFavoriteAirplane = database.favoriteAirplaneDao().getFavoriteAirplane(String.valueOf(airplaneId));
 
 
             if (updatedFavoriteAirplane != null) {
-                db.favoriteAirplaneDao().delete(updatedFavoriteAirplane);
-                holder.airplaneFavBtn.setImageResource(android.R.drawable.star_big_off);
+                database.favoriteAirplaneDao().delete(updatedFavoriteAirplane);
+                holder.airplaneFavBtn.setImageResource(R.drawable.fav_vacio);
                 holder.airplaneFavBtn.setSelected(false);
+                parentActivity.showMessage(R.string.not_favorite);
+
+
             } else {
-                FavoriteAirplane newFavoriteAirplane = new FavoriteAirplane(String.valueOf(airplaneId), null, null);
-                db.favoriteAirplaneDao().insert(newFavoriteAirplane);
-                holder.airplaneFavBtn.setImageResource(android.R.drawable.star_big_on);
+                FavoriteAirplane newFavoriteAirplane = new FavoriteAirplane(String.valueOf(airplaneId), airplane.getModel(), airplane.getPassengerCapacity(), airplane.getMaxSpeed(), "", null);
+                database.favoriteAirplaneDao().insert(newFavoriteAirplane);
+                holder.airplaneFavBtn.setImageResource(R.drawable.fav_lleno);
                 holder.airplaneFavBtn.setSelected(true);
+                parentActivity.showMessage(R.string.is_favorite);
+
             }
         });
     }

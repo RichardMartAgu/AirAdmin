@@ -7,7 +7,7 @@ public interface AirplaneDetailsContract {
     interface Model {
         interface OnLoadOneAirplaneListener {
             void onLoadOneAirplaneSuccess(Airplane airplane);
-            void onLoadOneAirplaneError(String message);
+            void onLoadOneAirplaneError(int stringId);
         }
         void loadOneAirplane(long airplaneId, OnLoadOneAirplaneListener listener);
     }
@@ -17,9 +17,9 @@ public interface AirplaneDetailsContract {
 
     interface View {
         void listOneAirplane(Airplane airplanes);
-        void showMessage(Airplane airplane);
 
         void showMessage(String message);
+        void showMessage(int stringId);
     }
 
 

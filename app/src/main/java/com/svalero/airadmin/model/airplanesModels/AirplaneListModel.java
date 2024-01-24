@@ -2,6 +2,7 @@ package com.svalero.airadmin.model.airplanesModels;
 
 import android.util.Log;
 
+import com.svalero.airadmin.R;
 import com.svalero.airadmin.api.AirplaneApi;
 import com.svalero.airadmin.api.AirplaneInterface;
 import com.svalero.airadmin.contract.airplanesContracts.AirportListContract;
@@ -30,7 +31,7 @@ public class AirplaneListModel implements AirportListContract.Model {
             @Override
             public void onFailure(Call<List<Airplane>> call, Throwable t) {
                 Log.e("getAirplanes", t.getMessage());
-                listener.onLoadAllAirplaneError("Se ha producido un error al conectar con el servidor");
+                listener.onLoadAllAirplaneError(R.string.error_server);
             }
         });
     }

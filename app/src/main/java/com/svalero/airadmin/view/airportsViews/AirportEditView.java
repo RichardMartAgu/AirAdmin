@@ -6,12 +6,13 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.CheckBox;
 import android.widget.EditText;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.google.android.material.snackbar.Snackbar;
 import com.mapbox.geojson.Point;
+import com.mapbox.maps.CameraOptions;
 import com.mapbox.maps.MapView;
 import com.mapbox.maps.Style;
 import com.mapbox.maps.plugin.annotation.AnnotationConfig;
@@ -81,73 +82,50 @@ public class AirportEditView extends AppCompatActivity implements Style.OnStyleL
         gesturesPlugin = GesturesUtils.getGestures(mapView);
         gesturesPlugin.addOnMapClickListener(this);
 
-    }
+        Point point = (Point.fromLngLat(-4.25, 41.29));
+        setCameraPosition(point);
 
+    }
 
     public void editOneAirport(View view) {
+        Snackbar snackbar = Snackbar.make(view, "Seguro que quiere editar el registro?", Snackbar.LENGTH_INDEFINITE);
+        snackbar.setAction("Editar definitivamente", view1 -> {
 
-        EditText editName = findViewById(R.id.edit_airport_name);
-        EditText editCity = findViewById(R.id.edit_airport_city);
-        EditText editFoundationYear = findViewById(R.id.edit_airport_foundation_year);
-        EditText editLongitude = findViewById(R.id.edit_airport_longitude);
-        EditText editLatitude = findViewById(R.id.edit_airport_latitude);
-        CheckBox checkActive = findViewById(R.id.edit_active);
+                    EditText editName = findViewById(R.id.edit_airport_name);
+                    EditText editCity = findViewById(R.id.edit_airport_city);
+                    EditText editFoundationYear = findViewById(R.id.edit_airport_foundation_year);
+                    EditText editLongitude = findViewById(R.id.edit_airport_longitude);
+                    EditText editLatitude = findViewById(R.id.edit_airport_latitude);
+                    CheckBox checkActive = findViewById(R.id.edit_active);
 
-        if (ValidatorUtil.areEditTextsValid(editName, editCity, editFoundationYear, editLongitude, editLatitude)) {
-            String name = editName.getText().toString();
-            String city = editCity.getText().toString();
-            String foundationYear = editFoundationYear.getText().toString();
+                    if (ValidatorUtil.areEditTextsValid(editName, editCity, editFoundationYear, editLongitude, editLatitude)) {
+                        String name = editName.getText().toString();
+                        String city = editCity.getText().toString();
+                        String foundationYear = editFoundationYear.getText().toString();
+                        double longitude = Double.parseDouble(editLongitude.getText().toString());
+                        double latitude = Double.parseDouble(editLatitude.getText().toString());
 
+                        boolean active = checkActive.isChecked();
 
-            double latitude;
-            String latitudeText = editLongitude.getText().toString();
-            if (!latitudeText.isEmpty()) {
-                try {
-                    latitude = Double.parseDouble(latitudeText);
-                } catch (NumberFormatException e) {
-                    showMessage("El campo de latitud debe contener un valor numérico válido");
-                    return;
-                }
-            } else {
-                showMessage("Por favor, completa el campo de latitud");
-                return;
-            }
+                        Airport airport = new Airport(0, name, city, foundationYear, latitude, longitude, active);
+                        editPresenter.editOneAirport(airportId, airport);
 
-
-            double longitude;
-            String longitudeText = editLatitude.getText().toString();
-            if (!longitudeText.isEmpty()) {
-                try {
-                    longitude = Double.parseDouble(longitudeText);
-                } catch (NumberFormatException e) {
-                    showMessage("El campo de longitud debe contener un valor numérico válido");
-                    return;
-                }
-            } else {
-                showMessage("Por favor, completa el campo de longitud");
-                return;
-            }
-
-            boolean active = checkActive.isChecked();
-
-            Airport airport = new Airport(0, name,city, foundationYear, latitude, longitude, active);
-
-            editPresenter.editOneAirport(airportId, airport);
-
-            Intent intent = new Intent(this, AirportListView.class);
-            startActivity(intent);
-
-
-        } else {
-            showMessage("Por favor, completa todos los campos");
-        }
+                    } else {
+                        showMessage("Por favor, completa todos los campos");
+                    }
+                })
+                .setActionTextColor(getResources().getColor(android.R.color.holo_red_light));
+        snackbar.show();
 
     }
+
+
     private void initializePointAnnotationManager() {
         AnnotationPlugin annotationPlugin = AnnotationPluginImplKt.getAnnotations(mapView);
         AnnotationConfig annotationConfig = new AnnotationConfig();
         pointAnnotationManager = PointAnnotationManagerKt.createPointAnnotationManager(annotationPlugin, annotationConfig);
     }
+
     private void addMarker(double latitude, double longitude, String title) {
         PointAnnotationOptions pointAnnotationOptions = new PointAnnotationOptions()
                 .withPoint(Point.fromLngLat(longitude, latitude))
@@ -155,17 +133,27 @@ public class AirportEditView extends AppCompatActivity implements Style.OnStyleL
                 .withTextField(title);
         pointAnnotationManager.create(pointAnnotationOptions);
     }
+
     @Override
     public boolean onMapClick(@NonNull Point point) {
         pointAnnotationManager.deleteAll();
         currentPoint = point;
         addMarker(point.latitude(), point.longitude(), getString(R.string.here));
-        EditText airportLatitude = findViewById(R.id.edit_airport_longitude);
+        EditText airportLatitude = findViewById(R.id.edit_airport_latitude);
         airportLatitude.setText(String.valueOf(point.latitude()));
-        EditText airportLongitude = findViewById(R.id.edit_airport_latitude);
+        EditText airportLongitude = findViewById(R.id.edit_airport_longitude);
         airportLongitude.setText(String.valueOf(point.longitude()));
 
         return false;
+    }
+    private void setCameraPosition(Point point) {
+        CameraOptions cameraPosition = new CameraOptions.Builder()
+                .center(point)
+                .pitch(0.0)
+                .zoom(5.0)
+                .bearing(-17.6)
+                .build();
+        mapView.getMapboxMap().setCamera(cameraPosition);
     }
 
     @Override
@@ -175,12 +163,19 @@ public class AirportEditView extends AppCompatActivity implements Style.OnStyleL
 
     @Override
     public void showMessage(String message) {
-        Toast.makeText(this, message, Toast.LENGTH_LONG).show();
-        //TODO revisar los mensajes
+        View view = findViewById(R.id.coordinatorLayout);
+        Snackbar.make(view, message, Snackbar.LENGTH_SHORT).show();
+
     }
 
     @Override
     public void showMessage(int stringId) {
-        showMessage(getResources().getString(stringId));
+        Snackbar snackbar = Snackbar.make(findViewById(android.R.id.content), getResources().getString(stringId), Snackbar.LENGTH_SHORT);
+        snackbar.setAction(R.string.go_list, view1 -> {
+                    Intent intent = new Intent(this, AirportListView.class);
+                    startActivity(intent);
+                })
+                .setActionTextColor(getResources().getColor(android.R.color.holo_blue_light));
+        snackbar.show();
     }
 }

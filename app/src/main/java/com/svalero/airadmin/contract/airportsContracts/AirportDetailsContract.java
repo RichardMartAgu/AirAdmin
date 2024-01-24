@@ -6,7 +6,7 @@ public interface AirportDetailsContract {
     interface Model {
         interface OnLoadOneAirportListener {
             void onLoadOneAirportSuccess(Airport airport);
-            void onLoadOneAirportError(String message);
+            void onLoadOneAirportError(int stringId);
         }
         void loadOneAirport(long airportId, OnLoadOneAirportListener listener);
     }
@@ -16,9 +16,9 @@ public interface AirportDetailsContract {
 
     interface View {
         void listOneAirport(Airport airports);
-        void showMessage(Airport airport);
 
         void showMessage(String message);
+        void showMessage(int StringId);
     }
 
 

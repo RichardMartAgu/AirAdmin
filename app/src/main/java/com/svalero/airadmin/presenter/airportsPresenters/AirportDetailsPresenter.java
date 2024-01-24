@@ -13,6 +13,7 @@ public class AirportDetailsPresenter implements AirportDetailsContract.Presenter
         this.view = view;
         model = new AirportDetailsModel();
     }
+
     @Override
     public void loadOneAirport(long airportId) {
         model.loadOneAirport(airportId, this);
@@ -24,8 +25,8 @@ public class AirportDetailsPresenter implements AirportDetailsContract.Presenter
     }
 
     @Override
-    public void onLoadOneAirportError(String message) {
-        view.showMessage(message);
+    public void onLoadOneAirportError(int stringId) {
+        view.showMessage(stringId);
     }
 
 }

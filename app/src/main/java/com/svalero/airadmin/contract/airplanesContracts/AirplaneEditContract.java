@@ -8,7 +8,7 @@ public interface AirplaneEditContract {
         void loadEditOneAirplane(long airplaneId, Airplane airplane, AirplaneEditContract.Model.OnLoadEditOneAirplaneListener listener);
         interface OnLoadEditOneAirplaneListener {
             void onLoadEditOneAirplaneSuccess();
-            void onLoadEditOneAirplaneError(String message);
+            void onLoadEditOneAirplaneError(int stringId);
         }
     }
     interface Presenter {

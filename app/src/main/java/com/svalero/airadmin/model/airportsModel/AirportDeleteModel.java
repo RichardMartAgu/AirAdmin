@@ -2,6 +2,7 @@ package com.svalero.airadmin.model.airportsModel;
 
 import android.util.Log;
 
+import com.svalero.airadmin.R;
 import com.svalero.airadmin.api.AirportApi;
 import com.svalero.airadmin.api.AirportInterface;
 import com.svalero.airadmin.contract.airportsContracts.AirportDeleteContract;
@@ -25,16 +26,15 @@ public class AirportDeleteModel implements AirportDeleteContract.Model {
                     listener.onLoadDeleteOneAirportSuccess();
 
                 } else {
-                    String errorMessage = response.message();
-                    Log.e("deleteAirportById", "Error en la respuesta: " + errorMessage);
-                    listener.onLoadDeleteOneAirportError("Error en la respuesta del servidor: " + errorMessage);
+                    Log.e("deleteAirportById", "Error al borrar ");
+                    listener.onLoadDeleteOneAirportError(R.string.error_to_delete);
                 }
             }
 
             @Override
             public void onFailure(Call<Airport> call, Throwable t) {
                 Log.e("deleteAirportById", "Error en la solicitud: " + t.getMessage());
-                listener.onLoadDeleteOneAirportError("Se ha producido un error al conectar con el servidor");
+                listener.onLoadDeleteOneAirportError(R.string.error_server);
             }
         });
     }

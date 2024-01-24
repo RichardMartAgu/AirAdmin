@@ -8,7 +8,7 @@ public interface AirportEditContract {
         void loadEditOneAirport(long airportId, Airport airport, OnLoadEditOneAirportListener listener);
         interface OnLoadEditOneAirportListener {
             void onLoadEditOneAirportSuccess();
-            void onLoadEditOneAirportError(String message);
+            void onLoadEditOneAirportError(int stringId);
         }
     }
     interface Presenter {

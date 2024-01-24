@@ -24,8 +24,8 @@ public class AirportListPresenter implements com.svalero.airadmin.contract.airpo
     }
 
     @Override
-    public void onLoadAllAirportError(String message) {
-        view.showMessage(message);
+    public void onLoadAllAirportError(int StringId){
+        view.showMessage(StringId);
     }
 
 

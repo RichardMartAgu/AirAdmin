@@ -2,10 +2,6 @@ package com.svalero.airadmin.utils;
 
 import android.widget.EditText;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-
 
 public class ValidatorUtil {
 
@@ -22,17 +18,6 @@ public class ValidatorUtil {
             }
         }
         return true;
-    }
-
-
-    public static boolean isEditTextDouble(EditText editText) {
-        try {
-            String text = editText.getText().toString().trim();
-            Double.parseDouble(text);
-            return true;
-        } catch (NumberFormatException e) {
-            return false;
-        }
     }
 
 }

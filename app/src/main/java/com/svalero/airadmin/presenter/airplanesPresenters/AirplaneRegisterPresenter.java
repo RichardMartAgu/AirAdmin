@@ -12,7 +12,7 @@ public class AirplaneRegisterPresenter implements AirplaneRegisterContract.Prese
     private AirplaneRegisterContract.View view;
     private AirplaneRegisterContract.Model model;
 
-    public AirplaneRegisterPresenter(AirplaneRegisterContract.View view , Context context) {
+    public AirplaneRegisterPresenter(AirplaneRegisterContract.View view, Context context) {
         this.view = view;
         model = new AirplaneRegisterModel(context);
     }
@@ -24,12 +24,13 @@ public class AirplaneRegisterPresenter implements AirplaneRegisterContract.Prese
 
     @Override
     public void onRegisterAirplaneSuccess() {
-        view.showMessage(R.string.registerOk);//TODO revisar string
+        view.showMessage(R.string.register_ok);
     }
 
     @Override
-    public void onRegisterAirplaneError(String message) {
-        view.showMessage(message);
+    public void onRegisterAirplaneError(int stringId) {
+        view.showMessage(stringId);
     }
+
 
 }

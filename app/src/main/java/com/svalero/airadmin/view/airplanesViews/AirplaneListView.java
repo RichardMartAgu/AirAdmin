@@ -11,13 +11,15 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.GridLayoutManager;
-import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.room.Room;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
+import com.google.android.material.snackbar.Snackbar;
 import com.svalero.airadmin.R;
 import com.svalero.airadmin.adapter.AirplaneAdapter;
 import com.svalero.airadmin.contract.airplanesContracts.AirportListContract;
+import com.svalero.airadmin.db.AppDatabase;
 import com.svalero.airadmin.domain.Airplane;
 import com.svalero.airadmin.presenter.airplanesPresenters.AirplaneListPresenter;
 import com.svalero.airadmin.view.IndexView;
@@ -31,6 +33,7 @@ public class AirplaneListView extends AppCompatActivity implements AirportListCo
     private AirplaneAdapter adapter;
     private AirportListContract.Presenter presenter;
     private SwipeRefreshLayout swipeRefreshLayout;
+    private AppDatabase appDatabase;
 
 
     @Override
@@ -39,18 +42,30 @@ public class AirplaneListView extends AppCompatActivity implements AirportListCo
         setContentView(R.layout.activity_airplane_list);
 
         airplane = new ArrayList<>();
+        appDatabase = Room.databaseBuilder(this, AppDatabase.class, "favoriteAirplaneDao")
+                .allowMainThreadQueries()
+                .build();
 
         RecyclerView recyclerView = findViewById(R.id.airplane_list);
         recyclerView.setHasFixedSize(true);
-        LinearLayoutManager layoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(new GridLayoutManager(this, 1));
-        adapter = new AirplaneAdapter(airplane);
+        adapter = new AirplaneAdapter(airplane,this);
         recyclerView.setAdapter(adapter);
+        adapter.setDatabase(appDatabase);
 
         presenter = new AirplaneListPresenter(this);
 
         swipeRefreshLayout = findViewById(R.id.swipe_refresh_layout);
         swipeRefreshLayout.setOnRefreshListener(this::loadStationsData);
+
+
+
+        Intent intent = getIntent();
+        if (intent.hasExtra("Snackbar")) {
+            String message = intent.getStringExtra("Snackbar");
+            View view = findViewById(R.id.coordinatorLayout);
+            Snackbar.make(view, message, Snackbar.LENGTH_SHORT).show();
+        }
 
     }
 
@@ -79,6 +94,7 @@ public class AirplaneListView extends AppCompatActivity implements AirportListCo
         adapter.notifyDataSetChanged();
         swipeRefreshLayout.setRefreshing(false);
     }
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.action_bar, menu);
@@ -113,15 +129,17 @@ public class AirplaneListView extends AppCompatActivity implements AirportListCo
 
 
     @Override
-    public void showMessage(int stringId) {
+    public void  showMessage(String message) {
+        View view = findViewById(R.id.coordinatorLayout);
+        Snackbar.make(view, message, Snackbar.LENGTH_SHORT).show();
 
     }
 
     @Override
-    public void showMessage(String message) {
-        Toast.makeText(this, message, Toast.LENGTH_LONG).show();
+    public void showMessage(int stringId) {
+        View view = findViewById(R.id.coordinatorLayout);
+        Snackbar.make(view, getResources().getString(stringId), Snackbar.LENGTH_SHORT).show();
     }
-
 
 
 }

@@ -23,8 +23,8 @@ public class AirplaneListPresenter implements AirportListContract.Presenter, Air
     }
 
     @Override
-    public void onLoadAllAirplaneError(String message) {
-        view.showMessage(message);
+    public void onLoadAllAirplaneError(int stringId) {
+        view.showMessage(stringId);
     }
 
 

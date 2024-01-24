@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/coordinatorLayout"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="match_parent">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -40,59 +41,96 @@
                         android:layout_height="wrap_content"
                         android:gravity="center"
                         android:text="@string/newAirplane"
-                        android:textColor="#DD2C00"
+                        android:textColor="#1F9997"
                         android:textSize="20sp"
                         android:textStyle="bold" />
 
-                    <EditText
-                        android:id="@+id/add_airplane_model"
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/airplane_model_text_input"
                         android:layout_width="match_parent"
-                        android:layout_height="40dp"
-                        android:ems="10"
+                        android:layout_height="wrap_content"
                         android:hint="@string/model"
-                        android:inputType="text" />
+                        app:errorEnabled="true">
 
-                    <EditText
-                        android:id="@+id/add_airplane_manufacturing_date"
-                        android:layout_width="match_parent"
-                        android:layout_height="40dp"
-                        android:ems="10"
-                        android:hint="@string/manufacturingDate"
-                        android:inputType="date" />
-
-                    <EditText
-                        android:id="@+id/add_airplane_passenger_capacity"
-                        android:layout_width="match_parent"
-                        android:layout_height="40dp"
-                        android:ems="10"
-                        android:hint="@string/passengerCapacity"
-                        android:inputType="number|numberDecimal" />
-
-                    <EditText
-                        android:id="@+id/add_airplane_max_speed"
-                        android:layout_width="match_parent"
-                        android:layout_height="40dp"
-                        android:ems="10"
-                        android:hint="@string/maxSpeed"
-                        android:inputType="number|numberDecimal" />
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:orientation="horizontal">
-
-                        <CheckBox
-                            android:id="@+id/add_airplane_active"
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/add_airplane_model"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:text="@string/active" />
-                    </LinearLayout>
+                            android:inputType="text"
+                            android:maxLines="1" />
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/airplane_manufacturing_date_text_input"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="@string/manufacturingDateEdit"
+                        app:errorEnabled="true">
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/add_airplane_manufacturing_date"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:inputType="text"
+                            android:maxLines="1" />
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/airplane_passenger_capacity_text_input"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="@string/passengerCapacity"
+                        app:errorEnabled="true">
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/add_airplane_passenger_capacity"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:inputType="number|numberDecimal"
+                            android:maxLines="1" />
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/airplane_max_speed_text_input"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="@string/maxSpeed"
+                        app:errorEnabled="true">
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/add_airplane_max_speed"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:inputType="number|numberDecimal"
+                            android:maxLines="1" />
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/airplane_airline_id_text_input"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="@string/airlineId"
+                        app:errorEnabled="true">
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/add_airplane_airline_id"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:inputType="number"
+                            android:maxLines="1" />
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                    <CheckBox
+                        android:id="@+id/add_airplane_active"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/active" />
 
                     <Button
                         android:id="@+id/airplane_register_button"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:onClick="createAirport"
+                        android:onClick="createAirplane"
                         android:text="@string/register" />
 
                 </LinearLayout>
@@ -101,4 +139,4 @@
         </androidx.cardview.widget.CardView>
 
     </LinearLayout>
-</androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

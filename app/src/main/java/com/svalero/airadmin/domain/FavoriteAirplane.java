@@ -11,15 +11,27 @@ public class FavoriteAirplane {
     @NonNull
     private String id;
     @ColumnInfo
-    private String name;
+    private String model;
+    @ColumnInfo
+    private int passengerCapacity;
+    @ColumnInfo
+    private float maxSpeed;
+    @ColumnInfo
+    private String comment;
     @ColumnInfo
     private Boolean favorite;
 
-    public FavoriteAirplane(@NonNull String id, String name, Boolean favorite) {
+
+    public FavoriteAirplane(@NonNull String id, String model, int passengerCapacity, float maxSpeed,String comment, Boolean favorite) {
         this.id = id;
-        this.name = name;
+        this.model = model;
+        this.passengerCapacity = passengerCapacity;
+        this.maxSpeed = maxSpeed;
+        this.comment = comment;
         this.favorite = favorite;
     }
+
+
 
     @NonNull
     public String getId() {
@@ -30,12 +42,12 @@ public class FavoriteAirplane {
         this.id = id;
     }
 
-    public String getName() {
-        return name;
+    public String getModel() {
+        return model;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setModel(String name) {
+        this.model = name;
     }
 
     public Boolean getFavorite() {
@@ -44,5 +56,28 @@ public class FavoriteAirplane {
 
     public void setFavorite(Boolean favorite) {
         this.favorite = favorite;
+    }
+
+    public int getPassengerCapacity() {
+        return passengerCapacity;
+    }
+
+    public void setPassengerCapacity(int passengerCapacity) {
+        this.passengerCapacity = passengerCapacity;
+    }
+
+    public float getMaxSpeed() {
+        return maxSpeed;
+    }
+
+    public void setMaxSpeed(float maxSpeed) {
+        this.maxSpeed = maxSpeed;
+    }
+    public String getComment() {
+        return comment;
+    }
+
+    public void setComment(String comment) {
+        this.comment = comment;
     }
 }

@@ -7,7 +7,7 @@ public interface AirportRegisterContract {
     interface Model {
         interface OnRegisterAirportListener {
             void onRegisterAirportSuccess();
-            void onRegisterAirportError(String message);
+            void onRegisterAirportError(int stringId);
         }
         void registerAirport(OnRegisterAirportListener listener, Airport airport);
     }

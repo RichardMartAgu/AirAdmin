@@ -20,37 +20,37 @@
         android:usesCleartextTraffic="true">
         <activity
             android:name=".view.airplanesViews.FavoritesAirplaneListView"
-            android:label="List favorite airplanes">
+            android:label="@string/list_of_favorite_airplanes">
         </activity>
         <activity
             android:name=".view.airplanesViews.AirplaneEditView"
-            android:label="Edit airplanes">
+            android:label="@string/editAirplane">
         </activity>
         <activity
             android:name=".view.airplanesViews.AirplaneDetailsView"
-            android:label="Airplane Details">
+            android:label="@string/airplaneDetails">
         </activity>
         <activity android:name=".view.airplanesViews.AirplaneListView"
-            android:label="Airplane list">
+            android:label="@string/airplaneList">
 
         </activity>
         <activity android:name=".view.airplanesViews.AirplaneRegisterView"
-            android:label="Register airplane">
+            android:label="@string/newAirplane">
         </activity>
         <activity
             android:name=".view.airportsViews.AirportEditView"
-            android:label="Edit airport">
+            android:label="@string/editAirport">
         </activity>
         <activity
             android:name=".view.airportsViews.AirportDetailsView"
-            android:label="Airport Details">
+            android:label="@string/airportDetails">
         </activity>
         <activity android:name=".view.airportsViews.AirportListView"
-            android:label="Airport list">
+            android:label="@string/airportList">
 
         </activity>
         <activity android:name=".view.airportsViews.AirportRegisterView"
-            android:label="Register airport">
+            android:label="@string/newAirport">
 
         </activity>
         <activity

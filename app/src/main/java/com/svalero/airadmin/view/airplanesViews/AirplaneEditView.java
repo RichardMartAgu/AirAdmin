@@ -5,28 +5,30 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.CheckBox;
 import android.widget.EditText;
-import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.google.android.material.snackbar.Snackbar;
 import com.svalero.airadmin.R;
 import com.svalero.airadmin.contract.airplanesContracts.AirplaneEditContract;
+import com.svalero.airadmin.domain.Airline;
 import com.svalero.airadmin.domain.Airplane;
 import com.svalero.airadmin.presenter.airplanesPresenters.AirplaneEditPresenter;
 import com.svalero.airadmin.utils.ValidatorUtil;
+import com.svalero.airadmin.view.airportsViews.AirportListView;
 
 import java.util.Objects;
 
-public class AirplaneEditView extends AppCompatActivity implements  AirplaneEditContract.View {
+public class AirplaneEditView extends AppCompatActivity implements AirplaneEditContract.View {
 
 
     private long airplaneId;
     private String editModel;
     private String editManufacturingDate;
-    private int adeitPassengerCapacity;
-    
-    private float adetMaxSpeed;
-    
+    private int editPassengerCapacity;
+    private float editMaxSpeed;
+    private long editAirlineId;
+
     private AirplaneEditContract.Presenter editPresenter;
 
     @Override
@@ -38,8 +40,9 @@ public class AirplaneEditView extends AppCompatActivity implements  AirplaneEdit
         airplaneId = Long.parseLong(Objects.requireNonNull(intent.getStringExtra("airplane_details_id")));
         editModel = intent.getStringExtra("airplane_details_model");
         editManufacturingDate = intent.getStringExtra("airplane_details_manufacturing_date");
-        adeitPassengerCapacity = Integer.parseInt(Objects.requireNonNull(intent.getStringExtra("airplane_details_passenger_capacity")));
-        adetMaxSpeed = Float.parseFloat(Objects.requireNonNull(intent.getStringExtra("airplane_details_max_speed")));
+        editPassengerCapacity = Integer.parseInt(Objects.requireNonNull(intent.getStringExtra("airplane_details_passenger_capacity")));
+        editMaxSpeed = Float.parseFloat(Objects.requireNonNull(intent.getStringExtra("airplane_details_max_speed")));
+        editAirlineId = Long.parseLong(Objects.requireNonNull(intent.getStringExtra("airplane_details_airline_id")));
 
         boolean isActive = intent.getBooleanExtra("airplane_details_active", false);
 
@@ -47,58 +50,68 @@ public class AirplaneEditView extends AppCompatActivity implements  AirplaneEdit
         EditText manufacturingDateView = findViewById(R.id.edit_airplane_manufacturing_date);
         EditText passengerCapacityView = findViewById(R.id.edit_airplane_passenger_capacity);
         EditText maxSpeedView = findViewById(R.id.edit_airplane_max_speed);
+        EditText airlineIdView = findViewById(R.id.edit_airplane_airline_id);
+
         CheckBox checkActive = findViewById(R.id.edit_airplane_active);
 
         modelView.setText(editModel);
         manufacturingDateView.setText(editManufacturingDate);
-        passengerCapacityView.setText(String.valueOf(adeitPassengerCapacity));
-        maxSpeedView.setText(String.valueOf(adetMaxSpeed));
+        passengerCapacityView.setText(String.valueOf(editPassengerCapacity));
+        maxSpeedView.setText(String.valueOf(editMaxSpeed));
+        airlineIdView.setText(String.valueOf(editAirlineId));
         checkActive.setChecked(isActive);
 
-
     }
-
 
     public void editOneAirplane(View view) {
 
-        EditText editModel = findViewById(R.id.edit_airplane_model);
-        EditText editManufacturingDate= findViewById(R.id.edit_airplane_manufacturing_date);
-        EditText editPassengerCapacity = findViewById(R.id.edit_airplane_passenger_capacity);
-        EditText editMaxSpeed = findViewById(R.id.edit_airplane_max_speed);
-        CheckBox checkActive = findViewById(R.id.edit_airplane_active);
+        Snackbar snackbar = Snackbar.make(view, R.string.question_edit, Snackbar.LENGTH_INDEFINITE);
+        snackbar.setAction(R.string.question_edit_button, view1 -> {
 
-        if (ValidatorUtil.areEditTextsValid(editModel, editManufacturingDate, editPassengerCapacity, editMaxSpeed)) {
-            String model = editModel.getText().toString();
-            String manufacturingDate = editManufacturingDate.getText().toString();
-            int passengerCapacity = Integer.parseInt(editPassengerCapacity.getText().toString());
-            float maxSpeed = Float.parseFloat(editMaxSpeed.getText().toString());
-            
+                    EditText editModel = findViewById(R.id.edit_airplane_model);
+                    EditText editManufacturingDate = findViewById(R.id.edit_airplane_manufacturing_date);
+                    EditText editPassengerCapacity = findViewById(R.id.edit_airplane_passenger_capacity);
+                    EditText editMaxSpeed = findViewById(R.id.edit_airplane_max_speed);
+                    EditText editAirplaneId = findViewById(R.id.edit_airplane_airline_id);
+                    CheckBox checkActive = findViewById(R.id.edit_airplane_active);
 
-            boolean active = checkActive.isChecked();
+                    if (ValidatorUtil.areEditTextsValid(editModel, editManufacturingDate, editPassengerCapacity, editMaxSpeed, editAirplaneId)) {
+                        String model = editModel.getText().toString();
+                        String manufacturingDate = editManufacturingDate.getText().toString();
+                        int passengerCapacity = Integer.parseInt(editPassengerCapacity.getText().toString());
+                        float maxSpeed = Float.parseFloat(editMaxSpeed.getText().toString());
+                        long airlineId = Long.parseLong(editAirplaneId.getText().toString());
+                        Airline airline = new Airline(airlineId);
 
-            Airplane airplane = new Airplane(0, model, manufacturingDate, passengerCapacity, maxSpeed, active);
+                        boolean active = checkActive.isChecked();
 
-            editPresenter.editOneAirplane(airplaneId, airplane);
+                        Airplane airplane = new Airplane(0, model, manufacturingDate, passengerCapacity, maxSpeed, active, airline);
 
-            Intent intent = new Intent(this, AirplaneListView.class);
-            startActivity(intent);
+                        editPresenter.editOneAirplane(airplaneId, airplane);
 
-
-        } else {
-            showMessage("Por favor, completa todos los campos");
-        }
-
+                    } else {
+                        showMessage(R.string.field_incomplete);
+                    }
+                })
+                .setActionTextColor(getResources().getColor(android.R.color.holo_red_light));
+        snackbar.show();
     }
-
 
     @Override
     public void showMessage(String message) {
-        Toast.makeText(this, message, Toast.LENGTH_LONG).show();
-        //TODO revisar los mensajes
+        View view = findViewById(R.id.coordinatorLayout);
+        Snackbar.make(view, message, Snackbar.LENGTH_SHORT).show();
+
     }
 
     @Override
     public void showMessage(int stringId) {
-        showMessage(getResources().getString(stringId));
+        Snackbar snackbar = Snackbar.make(findViewById(android.R.id.content), getResources().getString(stringId), Snackbar.LENGTH_SHORT);
+        snackbar.setAction(R.string.go_list, view1 -> {
+                    Intent intent = new Intent(this, AirplaneListView.class);
+                    startActivity(intent);
+                })
+                .setActionTextColor(getResources().getColor(android.R.color.holo_blue_light));
+        snackbar.show();
     }
 }

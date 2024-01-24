@@ -2,15 +2,11 @@ package com.svalero.airadmin.model.airplanesModels;
 
 import android.util.Log;
 
+import com.svalero.airadmin.R;
 import com.svalero.airadmin.api.AirplaneApi;
 import com.svalero.airadmin.api.AirplaneInterface;
 import com.svalero.airadmin.contract.airplanesContracts.AirplaneDetailsContract;
 import com.svalero.airadmin.domain.Airplane;
-
-import org.json.JSONException;
-import org.json.JSONObject;
-
-import java.io.IOException;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -28,26 +24,15 @@ public class AirplaneDetailsModel implements AirplaneDetailsContract.Model {
                     Airplane airplane = response.body();
                     listener.onLoadOneAirplaneSuccess(airplane);
                 } else {
-                    String errorMessage = "Error en la respuesta";
-                    if (response.errorBody() != null) {
-                        try {
-
-                            JSONObject errorJson = new JSONObject(response.errorBody().string());
-
-                            errorMessage = errorJson.optString("message", errorMessage);
-                        } catch (IOException | JSONException e) {
-                            e.printStackTrace();
-                        }
-                    }
-                    Log.e("getAirplaneById", "Error en la respuesta: " + errorMessage);
-                    listener.onLoadOneAirplaneError("Error en la respuesta del servidor: " + errorMessage);
+                    Log.e("getAirplaneById", "Error al buscar por Id");
+                    listener.onLoadOneAirplaneError(R.string.error_search_by_id);
                 }
             }
 
             @Override
             public void onFailure(Call<Airplane> call, Throwable t) {
                 Log.e("getAirportById", "Error en la solicitud: " + t.getMessage());
-                listener.onLoadOneAirplaneError("Se ha producido un error al conectar con el servidor");
+                listener.onLoadOneAirplaneError(R.string.error_server);
             }
         });
     }

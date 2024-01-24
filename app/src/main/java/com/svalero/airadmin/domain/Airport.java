@@ -4,24 +4,20 @@ import androidx.annotation.NonNull;
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 
-@Entity
 public class Airport {
 
     private Long id;
-    @NonNull
-    @ColumnInfo
+
     private  String name;
-    @NonNull
-    @ColumnInfo
+
     private String city;
-    @NonNull
-    @ColumnInfo
+
     private String foundationYear;
-    @ColumnInfo
+
     private double latitude;
-    @ColumnInfo
+
     private double longitude;
-    @ColumnInfo
+
     private boolean active;
 
     public Airport(long id, @NonNull String name, @NonNull String city, @NonNull String foundationYear, double latitude, double longitude, boolean active) {
@@ -31,7 +27,7 @@ public class Airport {
         this.foundationYear = foundationYear;
         this.latitude = latitude;
         this.longitude = longitude;
-        this.active = false;
+        this.active = active;
     }
 
     public long getId() {

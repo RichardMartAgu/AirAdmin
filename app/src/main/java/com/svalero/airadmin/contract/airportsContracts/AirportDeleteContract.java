@@ -6,7 +6,7 @@ public interface AirportDeleteContract {
         void loadDeleteOneAirport(long airportId, OnLoadDeleteOneAirportListener listener);
         interface OnLoadDeleteOneAirportListener {
             void onLoadDeleteOneAirportSuccess();
-            void onLoadDeleteOneAirportError(String message);
+            void onLoadDeleteOneAirportError(int stringId);
         }
     }
     interface Presenter {

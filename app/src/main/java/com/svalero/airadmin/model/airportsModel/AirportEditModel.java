@@ -1,16 +1,17 @@
 package com.svalero.airadmin.model.airportsModel;
 
-import static java.net.HttpURLConnection.HTTP_OK;
+import static java.net.HttpURLConnection.HTTP_BAD_REQUEST;
+import static java.net.HttpURLConnection.HTTP_NOT_FOUND;
+import static java.net.HttpURLConnection.HTTP_NO_CONTENT;
 
 import android.content.Context;
 import android.util.Log;
-import android.widget.Toast;
 
+import com.svalero.airadmin.R;
 import com.svalero.airadmin.api.AirportApi;
 import com.svalero.airadmin.api.AirportInterface;
 import com.svalero.airadmin.contract.airportsContracts.AirportEditContract;
 import com.svalero.airadmin.domain.Airport;
-import com.svalero.airadmin.utils.ErrorUtils;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -23,24 +24,20 @@ public class AirportEditModel implements AirportEditContract.Model {
         this.context = context;
     }
 
-    public void loadEditOneAirport(long airportId,Airport airport, AirportEditContract.Model.OnLoadEditOneAirportListener listener) {
+    public void loadEditOneAirport(long airportId, Airport airport, AirportEditContract.Model.OnLoadEditOneAirportListener listener) {
         AirportInterface api = AirportApi.buildInstance();
         Call<Airport> editAirportCall = api.editAirportById(airportId, airport);
         editAirportCall.enqueue(new Callback<Airport>() {
             @Override
             public void onResponse(Call<Airport> call, Response<Airport> response) {
-                if (response.code() == HTTP_OK) {
+                if (response.code() == HTTP_NO_CONTENT) {
                     Log.e("editAirport", response.message());
                     listener.onLoadEditOneAirportSuccess();
-                    Toast.makeText(context, "Registro exitoso", Toast.LENGTH_SHORT).show();
+                } else if (response.code() == HTTP_BAD_REQUEST) {
+                    listener.onLoadEditOneAirportError(R.string.error_validation);
+                } else if (response.code() == HTTP_NOT_FOUND) {
+                    listener.onLoadEditOneAirportError(R.string.error_airport_not_found);
 
-                } else if (response.code() == 400) {
-                    Toast.makeText(context, "Error de validación en los datos de entrada", Toast.LENGTH_SHORT).show();
-
-                } else {
-                    String errorMessage = ErrorUtils.parseError(response, context);
-                    Log.e("editAirport", "Error en la respuesta: " + errorMessage);
-                    listener.onLoadEditOneAirportError("Error en la respuesta del servidor: " + errorMessage);
                 }
             }
 
@@ -51,7 +48,7 @@ public class AirportEditModel implements AirportEditContract.Model {
                 } else {
 
                     Log.e("editAirport", "Error en la solicitud: " + t.getMessage());
-                    listener.onLoadEditOneAirportError("Se ha producido un error al conectar con el servidor");
+                    listener.onLoadEditOneAirportError(R.string.error_server);
                 }
             }
         });

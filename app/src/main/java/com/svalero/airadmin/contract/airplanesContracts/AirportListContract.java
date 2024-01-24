@@ -10,7 +10,7 @@ public interface AirportListContract {
         interface OnLoadAllAirplaneListener {
             void onLoadAllAirplaneSuccess(List<Airplane> airplane);
 
-            void onLoadAllAirplaneError(String message);
+            void onLoadAllAirplaneError(int stringId);
         }
 
         void loadAllAirplane(OnLoadAllAirplaneListener listener);

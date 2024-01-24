@@ -8,7 +8,7 @@ public interface AirplaneRegisterContract {
     interface Model {
         interface OnRegisterAirplaneListener {
             void onRegisterAirplaneSuccess();
-            void onRegisterAirplaneError(String message);
+            void onRegisterAirplaneError(int stringId);
         }
         void registerAirplane(OnRegisterAirplaneListener listener, Airplane airplane);
     }

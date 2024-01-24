@@ -6,7 +6,6 @@ import android.os.Handler;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -15,6 +14,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
+import com.google.android.material.snackbar.Snackbar;
 import com.svalero.airadmin.R;
 import com.svalero.airadmin.adapter.AirportAdapter;
 import com.svalero.airadmin.contract.airportsContracts.AirportListContract;
@@ -32,7 +32,7 @@ public class AirportListView extends AppCompatActivity implements AirportListCon
     private AirportAdapter adapter;
     private AirportListContract.Presenter presenter;
     private SwipeRefreshLayout swipeRefreshLayout;
-       
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,6 +52,13 @@ public class AirportListView extends AppCompatActivity implements AirportListCon
 
         swipeRefreshLayout = findViewById(R.id.swipe_refresh_layout);
         swipeRefreshLayout.setOnRefreshListener(this::loadStationsData);
+
+        Intent intent = getIntent();
+        if (intent.hasExtra("Snackbar")) {
+            String message = intent.getStringExtra("Snackbar");
+            View view = findViewById(R.id.coordinatorLayout);
+            Snackbar.make(view, message, Snackbar.LENGTH_SHORT).show();
+        }
 
     }
 
@@ -82,14 +89,18 @@ public class AirportListView extends AppCompatActivity implements AirportListCon
     }
 
     @Override
-    public void showMessage(int stringId) {
+    public void showMessage(String message) {
+        View view = findViewById(R.id.coordinatorLayout);
+        Snackbar.make(view, message, Snackbar.LENGTH_SHORT).show();
 
     }
 
     @Override
-    public void showMessage(String message) {
-        Toast.makeText(this, message, Toast.LENGTH_LONG).show();
+    public void showMessage(int stringId) {
+        View view = findViewById(R.id.coordinatorLayout);
+        Snackbar.make(view, getResources().getString(stringId), Snackbar.LENGTH_SHORT).show();
     }
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.action_bar, menu);
@@ -121,7 +132,6 @@ public class AirportListView extends AppCompatActivity implements AirportListCon
 
         return super.onOptionsItemSelected(item);
     }
-
 
 
 }

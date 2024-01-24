@@ -19,7 +19,7 @@ public interface AirplaneInterface {
     @GET("airplane/{airplaneId}")
     Call<Airplane> getAirplaneById(@Path("airplaneId") long airplaneId);
 
-    @POST("airplanes")
+    @POST("airplane")
     Call<Airplane> addAirplane(@Body Airplane airplane);
 
     @DELETE("airplane/{airplaneId}")

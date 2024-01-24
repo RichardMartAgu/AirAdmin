@@ -1,6 +1,7 @@
 package com.svalero.airadmin.presenter.airportsPresenters;
 
 import android.content.Context;
+import android.util.Log;
 
 import com.svalero.airadmin.R;
 import com.svalero.airadmin.contract.airportsContracts.AirportRegisterContract;
@@ -12,7 +13,7 @@ public class AirportRegisterPresenter implements AirportRegisterContract.Present
     private AirportRegisterContract.View view;
     private AirportRegisterContract.Model model;
 
-    public AirportRegisterPresenter(AirportRegisterContract.View view , Context context) {
+    public AirportRegisterPresenter(AirportRegisterContract.View view, Context context) {
         this.view = view;
         model = new AirportRegisterModel(context);
     }
@@ -24,12 +25,12 @@ public class AirportRegisterPresenter implements AirportRegisterContract.Present
 
     @Override
     public void onRegisterAirportSuccess() {
-        view.showMessage(R.string.registerOk);
+        view.showMessage(R.string.register_ok);
     }
 
     @Override
-    public void onRegisterAirportError(String message) {
-        view.showMessage(message);
+    public void onRegisterAirportError(int stringId) {
+        view.showMessage(stringId);
     }
 
 }

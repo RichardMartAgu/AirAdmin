@@ -2,10 +2,9 @@
 <resources>
     <string name="app_name">AirAdmin</string>
     <string name="airports">Airports</string>
-    <string name="inactive" >Inactive</string>
-    <string name="active" >Active</string>
-    <string name="here" >Here</string>
-    <string name="registerOk" >Airport register successful</string>
+    <string name="inactive">Inactive</string>
+    <string name="active">Active</string>
+    <string name="here">Here</string>
     <string name="details">details</string>
     <string name="airportList">Airport List</string>
     <string name="airplaneList">Airplanes list</string>
@@ -13,27 +12,59 @@
     <string name="go_register_button_description">Go register button</string>
     <string name="edit">Edit</string>
     <string name="delete">Delete</string>
-    <string name="foundationYear">Foundation year:</string>
+    <string name="foundationYear">Foundation year</string>
+    <string name="foundationYearEdit">Foundation year -> yyyy-mm-dd</string>
     <string name="latitude">Latitude</string>
     <string name="longitude">Longitude</string>
     <string name="city">City</string>
     <string name="editAirport">Edit airport</string>
-    <string name="aditAirplane">Editar avión</string>
+    <string name="editAirplane">Edit Airplane</string>
     <string name="newAirport">Register new airport</string>
     <string name="newAirplane">Register new airplane</string>
+    <string name="airportDetails">Airport details</string>
+    <string name="airplaneDetails">Airplane details</string>
     <string name="register">Register</string>
     <string name="name">Name</string>
     <string name="model">Model</string>
     <string name="titleNewAirplane">Register a New Airplane</string>
     <string name="manufacturingDate">Assembly date</string>
+    <string name="manufacturingDateEdit">Assembly date -> yyyy-mm-dd</string>
     <string name="passengerCapacity">Passenger capacity</string>
     <string name="maxSpeed">Max speed</string>
     <string name="airplanes">Airplanes</string>
+    <string name="airlineId">Id Aerolinea asociada</string>
+    <string name="airline_id">Airline Id</string>
+    <string name="list_of_favorite_airplanes">List of favorite airplanes</string>
+    <string name="favorite">Favorite airplanes</string>
+    <string name="comment">Comment</string>
+    <string name="write">"Write a new comment here…"</string>
+    <string name="commentButton">Save</string>
 
 
-<!--    Errores-->
+    <!--    Errors-->
     <string name="error_unknown">Error Unknown</string>
-    <string name="error_response">Error processing response</string>
+    <string name="error_to_delete">Delete error</string>
+    <string name="error_search_by_id">Error search by Id</string>
+    <string name="error_server">An error occurred while connecting to the server</string>
+    <string name="error_validation">Validation error in input data</string>
+    <string name="error_airplane_not_found">Airplane not found</string>
+    <string name="error_airport_not_found">Airport not found</string>
+
+    <!--Snack-->
+    <string name="register_ok" >Registration successfully completed</string>
+    <string name="edit_ok" >Editing successfully completed</string>
+    <string name="question_delete" >Confirm record deletion?</string>
+    <string name="question_edit" >Confirm record edition?</string>
+    <string name="question_delete_button" >Delete permanently</string>
+    <string name="question_edit_button" >Edit permanently</string>
+    <string name="airplane_delete_sucefull" >Airplane successfully deleted</string>
+    <string name="airport_delete_sucefull" >Airport successfully deleted</string>
+    <string name="field_incomplete" >Please complete all fields</string>
+    <string name="go_list" >Go to the list</string>
+    <string name="is_favorite" >Is favorite</string>
+    <string name="not_favorite" >Is not favorite</string>
+    <string name="add_comment" >Saved comment</string>
+
 
 
 </resources>

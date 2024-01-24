@@ -13,6 +13,7 @@ public class AirplaneDetailsPresenter implements AirplaneDetailsContract.Present
         this.view = view;
         model = new AirplaneDetailsModel();
     }
+
     @Override
     public void loadOneAirplane(long airplaneId) {
         model.loadOneAirplane(airplaneId, this);
@@ -24,8 +25,8 @@ public class AirplaneDetailsPresenter implements AirplaneDetailsContract.Present
     }
 
     @Override
-    public void onLoadOneAirplaneError(String message) {
-        view.showMessage(message);
+    public void onLoadOneAirplaneError(int stringId) {
+        view.showMessage(stringId);
     }
 
 }

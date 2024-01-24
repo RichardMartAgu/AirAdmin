@@ -1,30 +1,21 @@
 package com.svalero.airadmin.view.airportsViews;
 
 import android.content.Intent;
-import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.CheckBox;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.google.android.material.snackbar.Snackbar;
 import com.mapbox.geojson.Point;
 import com.mapbox.maps.CameraOptions;
 import com.mapbox.maps.MapView;
 import com.mapbox.maps.Style;
-import com.mapbox.maps.plugin.annotation.AnnotationConfig;
-import com.mapbox.maps.plugin.annotation.AnnotationPlugin;
-import com.mapbox.maps.plugin.annotation.AnnotationPluginImplKt;
 import com.mapbox.maps.plugin.annotation.generated.PointAnnotationManager;
-import com.mapbox.maps.plugin.annotation.generated.PointAnnotationManagerKt;
-import com.mapbox.maps.plugin.annotation.generated.PointAnnotationOptions;
-import com.mapbox.maps.plugin.gestures.GesturesPlugin;
-import com.mapbox.maps.plugin.gestures.GesturesUtils;
-import com.mapbox.maps.plugin.gestures.OnMapClickListener;
 import com.svalero.airadmin.R;
 import com.svalero.airadmin.contract.airportsContracts.AirportDeleteContract;
 import com.svalero.airadmin.contract.airportsContracts.AirportDetailsContract;
@@ -33,7 +24,7 @@ import com.svalero.airadmin.domain.Airport;
 import com.svalero.airadmin.presenter.airportsPresenters.AirportDeletePresenter;
 import com.svalero.airadmin.presenter.airportsPresenters.AirportDetailsPresenter;
 
-public class AirportDetailsView extends AppCompatActivity implements AirportDetailsContract.View, AirportDeleteContract.View, AirportEditContract.View, Style.OnStyleLoaded{
+public class AirportDetailsView extends AppCompatActivity implements AirportDetailsContract.View, AirportDeleteContract.View, AirportEditContract.View, Style.OnStyleLoaded {
     private MapView mapViewDetails;
     private PointAnnotationManager pointAnnotationManager;
     private long airportId;
@@ -87,10 +78,21 @@ public class AirportDetailsView extends AppCompatActivity implements AirportDeta
     }
 
     public void deleteOneAirport(View view) {
-        deletePresenter.deleteOneAirport(airportId);
-        showMessage("Aeropuerto eliminado exitosamente");
-        Intent intent = new Intent(AirportDetailsView.this, AirportListView.class);
-        startActivity(intent);
+
+        Snackbar snackbar = Snackbar.make(view, R.string.question_delete, Snackbar.LENGTH_INDEFINITE);
+        snackbar.setAction(R.string.question_delete_button, view1 -> {
+
+                    deletePresenter.deleteOneAirport(airportId);
+
+                    Intent intent = new Intent(AirportDetailsView.this, AirportListView.class);
+                    String message = getString(R.string.airport_delete_sucefull);
+                    intent.putExtra("Snackbar", message);
+                    startActivity(intent);
+
+                })
+                .setActionTextColor(getResources().getColor(android.R.color.holo_red_light));
+        snackbar.show();
+
     }
 
     public void goEditOneAirport(View view) {
@@ -118,6 +120,7 @@ public class AirportDetailsView extends AppCompatActivity implements AirportDeta
         view.getContext().startActivity(intent);
 
     }
+
     @Override
     public void onStyleLoaded(@NonNull Style style) {
     }
@@ -133,18 +136,18 @@ public class AirportDetailsView extends AppCompatActivity implements AirportDeta
     }
 
     @Override
-    public void showMessage(int stringId) {
-    }
-
-    @Override
-    public void showMessage(Airport airport) {
-    }
-
-    @Override
     public void showMessage(String message) {
+        View view = findViewById(R.id.coordinatorLayout);
+        Snackbar.make(view, message, Snackbar.LENGTH_SHORT).show();
 
-        Toast.makeText(this, message, Toast.LENGTH_LONG).show();
     }
 
+    @Override
+    public void showMessage(int stringId) {
+
+        Intent intent = new Intent(AirportDetailsView.this, AirportListView.class);
+        intent.putExtra("Snackbar", stringId);
+        startActivity(intent);
+    }
 
 }

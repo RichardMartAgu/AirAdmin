@@ -1,59 +1,54 @@
 package com.svalero.airadmin.domain;
 
-import androidx.annotation.NonNull;
-import androidx.room.ColumnInfo;
-
-import java.time.LocalDate;
-
 public class Airplane {
-
 
     private long id;
 
-    @NonNull
-    @ColumnInfo
+
     private String model;
-    @NonNull
-    @ColumnInfo
+
     private String manufacturingDate;
-    @ColumnInfo
+
     private int passengerCapacity;
-    @ColumnInfo
+
     private float maxSpeed;
-    @ColumnInfo
+
     private boolean active;
 
+    private Airline airline;
 
-    public Airplane(long id, @NonNull String model, @NonNull String manufacturingDate, int passengerCapacity, float maxSpeed, boolean active) {
+    public Airplane(long id, String model, String manufacturingDate, int passengerCapacity, float maxSpeed, boolean active, Airline airline) {
         this.id = id;
         this.model = model;
         this.manufacturingDate = manufacturingDate;
         this.passengerCapacity = passengerCapacity;
         this.maxSpeed = maxSpeed;
         this.active = active;
+        this.airline = airline;
+
     }
+
     public long getId() {
         return id;
     }
+
     public void setId(long id) {
         this.id = id;
     }
 
-    @NonNull
     public String getModel() {
         return model;
     }
 
-    public void setModel(@NonNull String model) {
+    public void setModel(String model) {
         this.model = model;
     }
 
-    @NonNull
     public String getManufacturingDate() {
         return manufacturingDate;
     }
 
-    public void setManufacturingDate(@NonNull String manufacturingDate) {
+    public void setManufacturingDate(String manufacturingDate) {
         this.manufacturingDate = manufacturingDate;
     }
 
@@ -80,5 +75,14 @@ public class Airplane {
     public void setActive(boolean active) {
         this.active = active;
     }
-}
 
+    public Airline getAirline() {
+        return airline;
+    }
+
+    public void getAirline(Airline airline) {
+        this.airline = airline;
+    }
+
+
+}

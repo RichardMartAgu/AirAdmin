@@ -1,16 +1,16 @@
 package com.svalero.airadmin.model.airportsModel;
 
-import static java.net.HttpURLConnection.HTTP_OK;
+import static java.net.HttpURLConnection.HTTP_BAD_REQUEST;
+import static java.net.HttpURLConnection.HTTP_CREATED;
 
 import android.content.Context;
 import android.util.Log;
-import android.widget.Toast;
 
+import com.svalero.airadmin.R;
 import com.svalero.airadmin.api.AirportApi;
 import com.svalero.airadmin.api.AirportInterface;
 import com.svalero.airadmin.contract.airportsContracts.AirportRegisterContract;
 import com.svalero.airadmin.domain.Airport;
-import com.svalero.airadmin.utils.ErrorUtils;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -26,33 +26,23 @@ public class AirportRegisterModel implements AirportRegisterContract.Model {
     public void registerAirport(OnRegisterAirportListener listener, Airport airport) {
         AirportInterface api = AirportApi.buildInstance();
         Call<Airport> addAirportCall = api.addAirport(airport);
+        Log.d("AirportRegisterModel", "Value of 'active' in model: " + airport.isActive());
         addAirportCall.enqueue(new Callback<Airport>() {
             @Override
             public void onResponse(Call<Airport> call, Response<Airport> response) {
-                if (response.code() == HTTP_OK) {
+                if (response.code() == HTTP_CREATED) {
                     Log.e("addAirport", response.message());
                     listener.onRegisterAirportSuccess();
-                    Toast.makeText(context, "Registro exitoso", Toast.LENGTH_SHORT).show();
-                    
-                } else if (response.code() == 400) {
-                    Toast.makeText(context, "Error de validación en los datos de entrada", Toast.LENGTH_SHORT).show();
-                    
-                } else {
-                    String errorMessage = ErrorUtils.parseError(response, context);
-                    Log.e("addAirport", "Error en la respuesta: " + errorMessage);
-                    listener.onRegisterAirportError("Error en la respuesta del servidor: " + errorMessage);
+
+                } else if (response.code() == HTTP_BAD_REQUEST) {
+                    listener.onRegisterAirportError(R.string.error_validation);
                 }
             }
 
             @Override
             public void onFailure(Call<Airport> call, Throwable t) {
-                if (t.getMessage() != null && t.getMessage().contains("End of input at line 1 column 1 path $")) {
-                    return;
-                } else {
-
-                    Log.e("addAirport", "Error en la solicitud: " + t.getMessage());
-                    listener.onRegisterAirportError("Se ha producido un error al conectar con el servidor");
-                }
+                Log.e("addAirport", "Error en la solicitud: " + t.getMessage());
+                listener.onRegisterAirportError(R.string.error_server);
             }
         });
     }

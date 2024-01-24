@@ -3,14 +3,15 @@ package com.svalero.airadmin.view.airportsViews;
 import android.content.Intent;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.CheckBox;
 import android.widget.EditText;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.google.android.material.snackbar.Snackbar;
 import com.mapbox.geojson.Point;
 import com.mapbox.maps.CameraOptions;
 import com.mapbox.maps.MapView;
@@ -52,7 +53,7 @@ public class AirportRegisterView extends AppCompatActivity implements Style.OnSt
         gesturesPlugin = GesturesUtils.getGestures(mapView);
         gesturesPlugin.addOnMapClickListener(this);
 
-        Point point = (Point.fromLngLat(-4.25,41.29));
+        Point point = (Point.fromLngLat(-4.25, 41.29));
         setCameraPosition(point);
     }
 
@@ -68,44 +69,17 @@ public class AirportRegisterView extends AppCompatActivity implements Style.OnSt
             String name = addName.getText().toString();
             String city = addCity.getText().toString();
             String foundationYear = addFoundationYear.getText().toString();
+            double latitude = Double.parseDouble(addLatitude.getText().toString());
+            double longitude = Double.parseDouble(addLongitude.getText().toString());
 
-            double latitude;
-            String latitudeText = addLatitude.getText().toString();
-            if (!latitudeText.isEmpty()) {
-                try {
-                    latitude = Double.parseDouble(latitudeText);
-                } catch (NumberFormatException e) {
-                    showMessage("El campo de latitud debe contener un valor numérico válido");
-                    return;
-                }
-            } else {
-                showMessage("Por favor, completa el campo de latitud");
-                return;
-            }
 
-            double longitude;
-            String longitudeText = addLongitude.getText().toString();
-            if (!longitudeText.isEmpty()) {
-                try {
-                    longitude = Double.parseDouble(longitudeText);
-                } catch (NumberFormatException e) {
-                    showMessage("El campo de longitud debe contener un valor numérico válido");
-                    return;
-                }
-            } else {
-                showMessage("Por favor, completa el campo de longitud");
-                return;
-            }
-
-            boolean active = checkActive.isChecked();
-
-            Airport airport = new Airport(0, name, city, foundationYear, latitude, longitude, active);
+            Airport airport = new Airport(0, name, city, foundationYear, latitude, longitude, checkActive.isActivated());
+            Log.d("Airport", "Active " + airport.isActive());
             presenter.registerAirport(airport);
 
-            Intent intent = new Intent(this, AirportListView.class);
-            startActivity(intent);
+
         } else {
-            showMessage("Por favor, completa todos los campos");
+            showMessage(R.string.field_incomplete);
         }
     }
 
@@ -115,6 +89,7 @@ public class AirportRegisterView extends AppCompatActivity implements Style.OnSt
         AnnotationConfig annotationConfig = new AnnotationConfig();
         pointAnnotationManager = PointAnnotationManagerKt.createPointAnnotationManager(annotationPlugin, annotationConfig);
     }
+
     private void addMarker(double latitude, double longitude, String title) {
         PointAnnotationOptions pointAnnotationOptions = new PointAnnotationOptions()
                 .withPoint(Point.fromLngLat(longitude, latitude))
@@ -122,14 +97,15 @@ public class AirportRegisterView extends AppCompatActivity implements Style.OnSt
                 .withTextField(title);
         pointAnnotationManager.create(pointAnnotationOptions);
     }
+
     @Override
     public boolean onMapClick(@NonNull Point point) {
         pointAnnotationManager.deleteAll();
         currentPoint = point;
         addMarker(point.latitude(), point.longitude(), getString(R.string.here));
-        EditText airportLatitude = findViewById(R.id.add_airport_longitude);
+        EditText airportLatitude = findViewById(R.id.add_airport_latitude);
         airportLatitude.setText(String.valueOf(point.latitude()));
-        EditText airportLongitude = findViewById(R.id.add_airport_latitude);
+        EditText airportLongitude = findViewById(R.id.add_airport_longitude);
         airportLongitude.setText(String.valueOf(point.longitude()));
         return false;
     }
@@ -138,6 +114,7 @@ public class AirportRegisterView extends AppCompatActivity implements Style.OnSt
     public void onStyleLoaded(@NonNull Style style) {
 
     }
+
     private void setCameraPosition(Point point) {
         CameraOptions cameraPosition = new CameraOptions.Builder()
                 .center(point)
@@ -147,13 +124,22 @@ public class AirportRegisterView extends AppCompatActivity implements Style.OnSt
                 .build();
         mapView.getMapboxMap().setCamera(cameraPosition);
     }
+
     @Override
     public void showMessage(String message) {
-        Toast.makeText(this, message, Toast.LENGTH_LONG).show();
+        View view = findViewById(R.id.coordinatorLayout);
+        Snackbar.make(view, message, Snackbar.LENGTH_SHORT).show();
+
     }
 
     @Override
     public void showMessage(int stringId) {
-        showMessage(getResources().getString(stringId));
+        Snackbar snackbar = Snackbar.make(findViewById(android.R.id.content), getResources().getString(stringId), Snackbar.LENGTH_SHORT);
+        snackbar.setAction(R.string.go_list, view1 -> {
+                    Intent intent = new Intent(this, AirportListView.class);
+                    startActivity(intent);
+                })
+                .setActionTextColor(getResources().getColor(android.R.color.holo_blue_light));
+        snackbar.show();
     }
 }

@@ -3,20 +3,20 @@
     xmlns:android="http://schemas.android.com/apk/res/android">
     <item
         android:id="@+id/volver"
-        android:icon="@android:drawable/ic_menu_revert"
+        android:icon="@drawable/icon_home"
         android:title="Índex"
         app:showAsAction="always" />
     <item
         android:id="@+id/airports"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:title="Aeropuertos" />
+        android:title="@string/airports" />
     <item
         android:id="@+id/airplanes"
-        android:title="Aviones" />
+        android:title="@string/airplanes" />
     <item
         android:id="@+id/fav_airplanes"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:title="Aviones Favoritos" />
+        android:title="@string/favorite" />
 </menu>
